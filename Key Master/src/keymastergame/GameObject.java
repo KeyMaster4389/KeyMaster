@@ -10,7 +10,7 @@ public class GameObject {
 	
 	public Box collision;
 	public Vector velocity;
-	private double gravAcc = 0.8;
+	protected double gravAcc = 0.8;
 		
 	public boolean collisionUp;
 	public boolean collisionRight;
@@ -61,7 +61,7 @@ public class GameObject {
 	}
 	
 	public void paint(Graphics g) {
-		collision.paint(g, Color.RED);
+		collision.paint(g, Color.LIGHT_GRAY);
 	}
 	
 	public boolean collisionActive() {

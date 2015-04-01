@@ -133,11 +133,14 @@ public class Game {
 	}
 	
 	private void addToGame(char c, Vector pos) {
+		
+		Vector position = new Vector(pos.x * StartingClass.TILESIZE + StartingClass.TILESIZE/2, pos.y * StartingClass.TILESIZE + StartingClass.TILESIZE/2);
+		
 		switch (c) {
 		case '0': 
 			break; //add empty space tile(?)
 		
-		case '1': /*System.out.println("tile at "+(int)pos.x+", "+(int)pos.y);*/ lvl.tiles.add(new Tile(pos)); 
+		case '1': lvl.tiles.add(new Tile(pos)); 
 			break; //add solid space tile
 		
 		case '2': 
@@ -146,7 +149,7 @@ public class Game {
 		case '3': 
 			break; //add ladder top (should place both a ladder and a tile)
 		
-		case 'P': 
+		case 'P': objects.add(new Player(position));
 			break; //set player starting position
 		
 		case 'D': 
@@ -163,7 +166,7 @@ public class Game {
 		
 		case 'C': 
 			break; //add enemy type C
-		case 'O': objects.add(new GameObject(new Vector(pos.x * StartingClass.TILESIZE + StartingClass.TILESIZE/2, pos.y * StartingClass.TILESIZE + StartingClass.TILESIZE/2)));
+		case 'O': objects.add(new GameObject(position));
 			break; // add basic object
 		}
 	}
