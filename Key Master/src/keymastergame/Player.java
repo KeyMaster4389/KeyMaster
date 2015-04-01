@@ -65,7 +65,12 @@ public class Player extends GameObject {
 		
 		
 		//decrement cooldown
-		if (abilityCooldown > 0) abilityCooldown--;
+		if (abilityCooldown > 0) {
+			abilityCooldown--;
+			if (abilityCooldown == 0) {
+				System.out.println("Ability available!");
+			}
+		}
 		
 		//do object logic here
 		if (!onLadder) {
@@ -74,7 +79,7 @@ public class Player extends GameObject {
 			if (collisionUp) {
 				//on the ground
 				
-				if (keyAbility && abilityCooldown == 0) {
+				if (doAbility && abilityCooldown == 0) {
 					//do ability
 					performAbility();
 				}
@@ -134,10 +139,10 @@ public class Player extends GameObject {
 			break;
 		case controlDown: keyDown = pressed;
 			break;
-		case controlAbility: if (keyAbility != pressed && pressed == true) doAbility = true; keyAbility = pressed;
+			//only do ability when pressed, not held
+		case controlAbility: doAbility = (keyAbility != pressed) && pressed; keyAbility = pressed;
 			break;
 		}
-		
 		
 	}
 	
@@ -145,6 +150,9 @@ public class Player extends GameObject {
 	public void performAbility() {
 		System.out.println("Ability activated!");
 
+		
+		
+		
 		abilityCooldown = abilityDuration;
 	}
 	

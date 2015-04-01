@@ -7,7 +7,7 @@ import keymastergame.framework.Box;
 import keymastergame.framework.Vector;
 
 public class GameObject {
-	
+	//track facing
 	public boolean faceLeft = false;
 	
 	public Box collision;
