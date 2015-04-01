@@ -3,13 +3,16 @@ package keymastergame;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import keymastergame.framework.Vector;
+
 public class Level {
 	public ArrayList<Tile> tiles;
-	//public ArrayList<Ladder> ladders;
+	public ArrayList<Ladder> ladders;
 	
 	public Level() {
 		// TODO Auto-generated constructor stub
 		tiles = new ArrayList<Tile>();
+		ladders = new ArrayList<Ladder>();
 	}
 
 	public void update() {
@@ -35,6 +38,9 @@ public class Level {
 	public void paint(Graphics g) {
 		for (Tile t : tiles) {
 			t.paint(g);
+		}
+		for (Ladder l : ladders) {
+			l.paint(g);
 		}
 	}
 	
@@ -98,13 +104,35 @@ public class Level {
 			}
 			
 		}
-		
-		
 	}
 	
 	
+	public void clearLevel() {
+		tiles.clear();
+		ladders.clear();
+		
+	}
 	
+	public Ladder getLadderFromPoint(Vector point) {
+		
+		for (Ladder l : ladders) {
+			if (l.collision.containsWithEdge(point)) {
+				return l;
+			}
+		}
+		return null;
+		
+	}
 	
-	
+	public Tile getTileFromPoint(Vector point) {
+
+		for (Tile t : tiles) {
+			if (!t.isDisabled() && t.collision.contains(point)) {
+				return t;
+			}
+		}
+		return null;
+		
+	}
 	
 }

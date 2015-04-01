@@ -56,7 +56,7 @@ public class GameObject {
 		velocity.x += (Math.random()-0.5)*2;
 		if(collisionUp && Math.random() < 0.02) {
 			//jump
-			velocity.y = -15;
+			velocity.y = -10;
 		}
 		
 		collision.position.add(velocity);

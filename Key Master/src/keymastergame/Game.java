@@ -33,7 +33,7 @@ public class Game {
 		lvl.update();
 		
 		plr.update();
-		doCollision(plr);
+		if (plr.collisionActive()) doCollision(plr);
 		
 		for (GameObject e : objects) {
 			e.update();
@@ -154,10 +154,10 @@ public class Game {
 		case '1': lvl.tiles.add(new Tile(pos)); 
 			break; //add solid space tile
 		
-		case '2': 
+		case '2': lvl.ladders.add(new Ladder(realPos));
 			break; //add ladder
 		
-		case '3': 
+		case '3': lvl.tiles.add(new Tile(pos)); lvl.ladders.add(new Ladder(realPos));
 			break; //add ladder top (should place both a ladder and a tile)
 		
 		case 'P': plr.collision.position = realPos;

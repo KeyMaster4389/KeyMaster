@@ -38,6 +38,15 @@ public class Box {
 		}
 	}
 	
+	public boolean containsWithEdge(Vector p) {
+		if (p.x <= position.x + size.x/2 && p.x >= position.x - size.x/2
+				&& p.y <= position.y + size.y/2 && p.y >= position.y - size.y/2) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	//check if box is intersecting this box
 	public boolean intersects(Box b) {
 		Box r = new Box();

@@ -15,9 +15,9 @@ import keymastergame.framework.Animation;
 
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
-	private int state;
+	public static int state;
 	//private Intro introState;
-	private Game gameState;
+	public static Game gameState;
 
 	// for Image variables later
 	private Image image;
