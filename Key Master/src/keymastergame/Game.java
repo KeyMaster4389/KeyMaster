@@ -17,7 +17,7 @@ public class Game {
 
 	Level lvl;
 	ArrayList<GameObject> objects;
-	//Player plr;
+	Player plr;
 	//Door door;
 	//Key key;
 	
@@ -26,12 +26,14 @@ public class Game {
 	public Game() {
 		objects = new ArrayList<GameObject>();
 		lvl = new Level();
-		
+		plr = new Player(new Vector(0, 0));
 	}
 	
 	public void update() {
 		lvl.update();
 		
+		plr.update();
+		doCollision(plr);
 		
 		for (GameObject e : objects) {
 			e.update();
@@ -47,10 +49,18 @@ public class Game {
 		for (GameObject e : objects) {
 			e.paint(g);
 		}
+		
+		
+		//paint player last?
+		plr.paint(g);
+		
+		
 	}
+	
 	
 	public void readInput(int code, boolean pressed) {
 		//do player controls here i guess
+		plr.input(code, pressed);
 	}
 	
 	
@@ -134,7 +144,8 @@ public class Game {
 	
 	private void addToGame(char c, Vector pos) {
 		
-		Vector position = new Vector(pos.x * StartingClass.TILESIZE + StartingClass.TILESIZE/2, pos.y * StartingClass.TILESIZE + StartingClass.TILESIZE/2);
+		//convert grid position to actual position in pixels
+		Vector realPos = new Vector(pos.x * StartingClass.TILESIZE + StartingClass.TILESIZE/2, pos.y * StartingClass.TILESIZE + StartingClass.TILESIZE/2);
 		
 		switch (c) {
 		case '0': 
@@ -149,7 +160,7 @@ public class Game {
 		case '3': 
 			break; //add ladder top (should place both a ladder and a tile)
 		
-		case 'P': objects.add(new Player(position));
+		case 'P': plr.collision.position = realPos;
 			break; //set player starting position
 		
 		case 'D': 
@@ -166,7 +177,7 @@ public class Game {
 		
 		case 'C': 
 			break; //add enemy type C
-		case 'O': objects.add(new GameObject(position));
+		case 'O': objects.add(new GameObject(realPos));
 			break; // add basic object
 		}
 	}

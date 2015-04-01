@@ -62,26 +62,26 @@ public class Tile {
 			if (openTop) {
 				int x1 = (int)(collision.position.x - collision.size.x/2);
 				int y1 = (int)(collision.position.y - collision.size.y/2);
-				int x2 = (int)(collision.position.x + collision.size.x/2);
+				int x2 = (int)(collision.position.x + collision.size.x/2 - 1);
 				int y2 = (int)(collision.position.y - collision.size.y/2);
 				
 				g.drawLine(x1, y1, x2, y2);
 			}
 			if (openRight) {
 
-				int x1 = (int)(collision.position.x + collision.size.x/2);
+				int x1 = (int)(collision.position.x + collision.size.x/2 - 1);
 				int y1 = (int)(collision.position.y - collision.size.y/2);
-				int x2 = (int)(collision.position.x + collision.size.x/2);
-				int y2 = (int)(collision.position.y + collision.size.y/2);
+				int x2 = (int)(collision.position.x + collision.size.x/2 - 1);
+				int y2 = (int)(collision.position.y + collision.size.y/2 - 1);
 				
 				g.drawLine(x1, y1, x2, y2);
 			}
 			if (openBottom) {
 
 				int x1 = (int)(collision.position.x - collision.size.x/2);
-				int y1 = (int)(collision.position.y + collision.size.y/2);
-				int x2 = (int)(collision.position.x + collision.size.x/2);
-				int y2 = (int)(collision.position.y + collision.size.y/2);
+				int y1 = (int)(collision.position.y + collision.size.y/2 - 1);
+				int x2 = (int)(collision.position.x + collision.size.x/2 - 1);
+				int y2 = (int)(collision.position.y + collision.size.y/2 - 1);
 				
 				g.drawLine(x1, y1, x2, y2);
 			}
@@ -90,7 +90,7 @@ public class Tile {
 				int x1 = (int)(collision.position.x - collision.size.x/2);
 				int y1 = (int)(collision.position.y - collision.size.y/2);
 				int x2 = (int)(collision.position.x - collision.size.x/2);
-				int y2 = (int)(collision.position.y + collision.size.y/2);
+				int y2 = (int)(collision.position.y + collision.size.y/2 - 1);
 				
 				g.drawLine(x1, y1, x2, y2);
 			}

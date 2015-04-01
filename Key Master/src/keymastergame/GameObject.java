@@ -8,9 +8,11 @@ import keymastergame.framework.Vector;
 
 public class GameObject {
 	
+	public boolean faceLeft = false;
+	
 	public Box collision;
 	public Vector velocity;
-	protected double gravAcc = 0.8;
+	protected double gravAcc = 0.5;
 		
 	public boolean collisionUp;
 	public boolean collisionRight;
@@ -54,7 +56,7 @@ public class GameObject {
 		velocity.x += (Math.random()-0.5)*2;
 		if(collisionUp && Math.random() < 0.02) {
 			//jump
-			velocity.y = -20;
+			velocity.y = -15;
 		}
 		
 		collision.position.add(velocity);

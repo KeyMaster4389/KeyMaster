@@ -133,12 +133,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		gameState.readInput(e.getKeyCode(), true);
-	}// end of keyPressed method
+	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		gameState.readInput(e.getKeyCode(), false);
-	}//end of keyReleased method
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
