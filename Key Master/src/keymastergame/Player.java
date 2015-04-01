@@ -27,8 +27,8 @@ public class Player extends GameObject {
 	
 	private boolean onLadder = false;
 	
-	private static double horizontalSpeed = 2;
-	private static double ladderSpeed = 2; 
+	private static double horizontalSpeed = 2.5;
+	private static double ladderSpeed = 2.5; 
 	
 	//tracks state of controls, true = pressed, false = not pressed
 	private boolean keyLeft = false;
@@ -72,7 +72,6 @@ public class Player extends GameObject {
 			}
 		}
 		
-		//do object logic here
 		if (!onLadder) {
 			//not attached to a ladder
 			
@@ -85,7 +84,7 @@ public class Player extends GameObject {
 					performAbility();
 				}
 
-				if (keyUp || keyDown && !(keyLeft || keyRight)) {
+				if ((keyUp || keyDown) && !(keyLeft || keyRight)) {
 					//try to attach to ladder
 					
 					Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
@@ -112,18 +111,36 @@ public class Player extends GameObject {
 		} else {
 			
 			
-			if (canMountLadder()) {
-				velocity.y = 0;
+			if (canMountLadder(collision.position)) {
 				//on ladder
+				velocity.y = 0;
 				if (faceLeft) faceLeft = false;
 	
 				if (keyUp && !keyDown) {
-					velocity.y = -ladderSpeed;
+					if (canMountLadder(new Vector(collision.position.x, collision.position.y - ladderSpeed))) {
+						velocity.y = -ladderSpeed;
+					} else {
+						//reached top of ladder
+						Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
+						
+						collision.position.y = ladder.collision.position.y - ladder.collision.size.y/2;
+						
+					}
+					
 				} else if (keyDown && !keyUp) {
-					velocity.y = ladderSpeed;
+					
+					if (canMountLadder(new Vector(collision.position.x, collision.position.y + ladderSpeed))) {
+						velocity.y = ladderSpeed;
+					} else {
+						//reached bottom of ladder
+						Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
+						
+						collision.position.y = ladder.collision.position.y + ladder.collision.size.y/2;
+						
+					}
 				}
 	
-				//left & right dismounts ladder
+				//left or right dismounts ladder
 				if (!(keyUp || keyDown) && (keyLeft || keyRight) && canDismountLadder()) {
 					onLadder = false;
 				}
@@ -176,16 +193,15 @@ public class Player extends GameObject {
 		abilityCooldown = abilityDuration;
 	}
 	
-	//check if the player is intersecting a ladder's collision box
-	public boolean canMountLadder() {
-		
-		Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
+	public boolean canMountLadder(Vector pos) {
+		//check if the player is intersecting a ladder's collision box
+		Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(pos);
 		
 		return ladder != null;
 	}
 	public boolean canDismountLadder() {
-		//check if player is currently colliding with any tiles
 		
+		//check if player is currently colliding with any tiles
 		for (Tile t : StartingClass.gameState.lvl.tiles) {
 			if (t.collision.intersects(collision)) {
 				return false;
@@ -195,6 +211,7 @@ public class Player extends GameObject {
 	}
 
 	public boolean collisionActive() {
+		//don't collide with tiles if on a ladder
 		return !onLadder;
 	}
 }
