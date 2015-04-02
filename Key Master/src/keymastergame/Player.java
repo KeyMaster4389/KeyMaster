@@ -123,7 +123,8 @@ public class Player extends GameObject {
 						//reached top of ladder
 						Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
 						collision.position.y = ladder.collision.position.y - ladder.collision.size.y/2;
-						onLadder = false;
+						
+						if (canDismountLadder()) onLadder = false;
 						
 					}
 					
@@ -135,7 +136,8 @@ public class Player extends GameObject {
 						//reached bottom of ladder
 						Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
 						collision.position.y = ladder.collision.position.y + ladder.collision.size.y/2;
-						onLadder = false;
+						
+						if (canDismountLadder()) onLadder = false;
 					}
 				}
 	
