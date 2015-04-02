@@ -11,8 +11,7 @@ public class Ladder {
 	
 	public Ladder(Vector pos) {
 		collision = new Box(new Vector(pos.x, pos.y - StartingClass.TILESIZE/2),
-							new Vector(StartingClass.TILESIZE/2 - 2, StartingClass.TILESIZE));
-		
+							new Vector(StartingClass.TILESIZE/2, StartingClass.TILESIZE));
 	}
 	
 	public void paint(Graphics g) {

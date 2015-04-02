@@ -222,7 +222,7 @@ public class Player extends GameObject {
 		
 		//check if player is currently colliding with any tiles
 		for (Tile t : StartingClass.gameState.lvl.tiles) {
-			if (t.collision.intersects(collision)) {
+			if (!t.isDisabled() && t.collision.intersects(collision)) {
 				return false;
 			}
 		}
