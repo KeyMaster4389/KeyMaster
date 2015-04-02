@@ -169,7 +169,7 @@ public class Game {
 		
 		case 'C': 
 			break; //add enemy type C
-		case 'O': objects.add(new GameObject(realPos));
+		case 'G': objects.add(new GameObject(realPos));
 			break; // add basic object
 		}
 	}
