@@ -23,6 +23,8 @@ public class Player extends GameObject {
 	
 	*/
 	
+	boolean hasKey = false;
+	
 	protected double gravAcc = 0.5;
 	
 	private boolean onLadder = false;
