@@ -102,7 +102,7 @@ public class Game {
 	
 	
 	public boolean loadLevel(String path) {
-		lvl.tiles.clear();
+		lvl.clear();
 		objects.clear();
 		
 		try {
@@ -129,14 +129,6 @@ public class Game {
 			return false;
 		}
 				
-		//testing tile disabling
-		/*
-		for (Tile t : lvl.tiles) {
-			if (Math.random() > 0.5)
-				t.setDisabled((int)(600 * Math.random()));
-			
-		}*/
-
 		lvl.generateLevelCollision();
 		
 		return true;

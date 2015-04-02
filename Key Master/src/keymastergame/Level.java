@@ -107,7 +107,7 @@ public class Level {
 	}
 	
 	
-	public void clearLevel() {
+	public void clear() {
 		tiles.clear();
 		ladders.clear();
 		

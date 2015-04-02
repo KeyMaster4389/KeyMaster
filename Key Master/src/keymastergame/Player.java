@@ -187,10 +187,30 @@ public class Player extends GameObject {
 	public void performAbility() {
 		System.out.println("Ability activated!");
 
+		Vector checkPoint = new Vector(collision.position);
 		
+		Vector removePoint = new Vector(collision.position);
+		if (!faceLeft) {
+			removePoint.x += StartingClass.TILESIZE;
+			checkPoint.x += StartingClass.TILESIZE;
+		} else {
+			removePoint.x -= StartingClass.TILESIZE;
+			checkPoint.x -= StartingClass.TILESIZE;
+		}
+		removePoint.y += StartingClass.TILESIZE;
 		
+
+		Tile t1 = StartingClass.gameState.lvl.getTileFromPoint(checkPoint);
+		Tile t2 = StartingClass.gameState.lvl.getTileFromPoint(removePoint);
 		
-		abilityCooldown = abilityDuration;
+		if (t1 == null && t2 != null) {
+			t2.setDisabled(abilityDuration);
+			
+			abilityCooldown = abilityDuration;
+		
+		} else {
+			System.out.println("Ability failed!");
+		}
 	}
 	
 	public boolean canMountLadder(Vector pos) {

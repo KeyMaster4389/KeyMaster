@@ -19,6 +19,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	//private Intro introState;
 	public static Game gameState;
 
+	private Thread thread;
+	
 	// for Image variables later
 	private Image image;
 	private Graphics second;
@@ -53,7 +55,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 		// TODO: Image Setups
 
-		
+
+		Thread thread = new Thread(this);
+		thread.start();
 		
 
 	}// end of init method
@@ -61,8 +65,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	@Override
 	public void start() {
 
-		Thread thread = new Thread(this);
-		thread.start();
 
 	}// end of start method
 
