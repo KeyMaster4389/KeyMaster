@@ -114,7 +114,7 @@ public class Player extends GameObject {
 			if (canMountLadder(collision.position)) {
 				//on ladder
 				velocity.y = 0;
-				if (faceLeft) faceLeft = false;
+				//if (faceLeft) faceLeft = false;
 	
 				if (keyUp && !keyDown) {
 					if (canMountLadder(new Vector(collision.position.x, collision.position.y - ladderSpeed))) {
@@ -122,8 +122,8 @@ public class Player extends GameObject {
 					} else {
 						//reached top of ladder
 						Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
-						
 						collision.position.y = ladder.collision.position.y - ladder.collision.size.y/2;
+						onLadder = false;
 						
 					}
 					
@@ -134,9 +134,8 @@ public class Player extends GameObject {
 					} else {
 						//reached bottom of ladder
 						Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
-						
 						collision.position.y = ladder.collision.position.y + ladder.collision.size.y/2;
-						
+						onLadder = false;
 					}
 				}
 	

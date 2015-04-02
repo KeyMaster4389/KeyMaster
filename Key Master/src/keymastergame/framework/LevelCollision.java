@@ -102,10 +102,10 @@ public class LevelCollision {
 			switch (moveOutAxis) {
 			case 0: break;
 			
-			case 1: object.collision.position.y += magnitude; object.collisionUp = true; object.velocity.y = 0; break;
-			case 2: object.collision.position.x += magnitude; object.collisionRight = true; object.velocity.x = 0; break;
-			case 3: object.collision.position.y += magnitude; object.collisionDown = true; object.velocity.y = 0; break;
-			case 4: object.collision.position.x += magnitude; object.collisionLeft = true; object.velocity.x = 0; break;
+			case 1: object.collision.position.y += magnitude; object.collisionUp = true; if (object.velocity.y > 0) object.velocity.y = 0; break;
+			case 2: object.collision.position.x += magnitude; object.collisionRight = true; if (object.velocity.x > 0)object.velocity.x = 0; break;
+			case 3: object.collision.position.y += magnitude; object.collisionDown = true; if (object.velocity.y < 0)object.velocity.y = 0; break;
+			case 4: object.collision.position.x += magnitude; object.collisionLeft = true;if (object.velocity.y < 0) object.velocity.x = 0; break;
 			
 			}
 		}
