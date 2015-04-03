@@ -61,19 +61,26 @@ public class Key extends GameObject {
 		if (active) {
 		
 			if (targetDoor == null) {
-				//do object logic here
 				if (following == null) {
 					//do nothing	
 		
 					
 				} else {
-					//follow thing
-					
+					//follow player
 					goTowardsTarget(maxFollowRange, following);
+					
+
+					if (following.collision.intersects(StartingClass.gameState.door.collision)) {
+						targetDoor = StartingClass.gameState.door;
+					}		
+					
+					
 				}
 			} else {
+				//go to door
 				if (collision.position.getDistanceTo(targetDoor.collision.position) > 2) {
-				
+
+					maxSpeed = 2;
 					goTowardsTarget(0, targetDoor);
 				
 				} else {

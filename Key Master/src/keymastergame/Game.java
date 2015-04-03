@@ -53,11 +53,6 @@ public class Game {
 		door.update();
 		key.update();
 		
-		if (key.targetDoor == null && plr.hasKey && plr.collision.intersects(door.collision)) {
-			key.targetDoor = door;
-		}		
-		
-		
 		if (plr.collision.intersects(key.collision)) {
 			key.setFollow(plr);
 		}
