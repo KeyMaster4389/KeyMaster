@@ -7,12 +7,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Resource {
+	
+	public static Image background;
 
 	public static Image tileSpr;
 	public static Image ladderSpr;
 	
+	
 	public static boolean loadResources() {
 		try {
+			background = ImageIO.read(new File("data/background.jpg"));
+			
 			tileSpr = ImageIO.read(new File("data/tile.bmp"));
 			ladderSpr = ImageIO.read(new File("data/Ladder.png"));
 			

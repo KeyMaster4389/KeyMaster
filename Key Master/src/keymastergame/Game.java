@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import keymastergame.framework.LevelCollision;
+import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
 
 public class Game {
@@ -59,6 +60,9 @@ public class Game {
 	}
 	
 	public void paint(Graphics g) {
+		
+		g.drawImage(Resource.background, 0, 0, null);
+		
 		lvl.paint(g);
 
 		door.paint(g);
