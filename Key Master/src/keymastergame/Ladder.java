@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import keymastergame.framework.Box;
+import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
 
 public class Ladder {
@@ -15,7 +16,17 @@ public class Ladder {
 	}
 	
 	public void paint(Graphics g) {
+		
+		if (StartingClass.debugGraphics) {
 		collision.paint(g, new Color(0, 0, 255, 150));
+		
+		} else {
+			int xPos = (int)(collision.position.x - StartingClass.TILESIZE/2);
+			int yPos = (int)(collision.position.y - 4);
+		
+			g.drawImage(Resource.ladderSpr, xPos, yPos, null);
+		}
+		
 	}
 	
 	//no need for update

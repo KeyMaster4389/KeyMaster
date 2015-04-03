@@ -2,8 +2,10 @@ package keymastergame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.ImageObserver;
 
 import keymastergame.framework.Box;
+import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
 
 public class Tile {
@@ -53,10 +55,22 @@ public class Tile {
 	public void paint(Graphics g) {
 		if (!isDisabled()) {
 			
-			if ((gridX + gridY) % 2 == 0)
-				collision.paint(g, Color.GREEN);
-			else
-				collision.paint(g, new Color(0,200,0));
+			
+			if (StartingClass.debugGraphics) {
+			
+				if ((gridX + gridY) % 2 == 0)
+					collision.paint(g, Color.GREEN);
+				else
+					collision.paint(g, new Color(0,200,0));
+				
+			} else {
+				int xPos = (int)(collision.position.x - StartingClass.TILESIZE/2);
+				int yPos = (int)(collision.position.y - StartingClass.TILESIZE/2);
+				
+				g.drawImage(Resource.tileSpr, xPos, yPos, null);
+				
+			}
+			
 			
 			g.setColor(Color.BLACK);
 			if (openTop) {

@@ -12,9 +12,11 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import keymastergame.framework.Animation;
+import keymastergame.framework.Resource;
 
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
+	public static final boolean debugGraphics = false;
 	public static int state;
 	//private Intro introState;
 	public static Game gameState;
@@ -37,6 +39,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void init() {
+		
+		Resource.loadResources();
 		
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
 		setBackground(Color.WHITE);
