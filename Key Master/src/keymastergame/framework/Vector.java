@@ -33,4 +33,15 @@ public class Vector {
 	public double getMagnitude() {
 		return Math.sqrt((x * x) + (y * y));
 	}
+	
+	public double getDistanceTo(Vector v) {
+		Vector diff = new Vector();
+		diff.x = v.x;
+		diff.y = v.y;
+		
+		diff.x -= x;
+		diff.y -= y;
+		
+		return diff.getMagnitude();
+	}
 }

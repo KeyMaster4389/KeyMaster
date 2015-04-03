@@ -18,7 +18,7 @@ public class Game {
 	Level lvl;
 	ArrayList<GameObject> objects;
 	Player plr;
-	//Door door;
+	Door door;
 	Key key;
 	
 	//private int playerLives = 3;
@@ -28,10 +28,12 @@ public class Game {
 		lvl = new Level();
 		plr = new Player();
 		key = new Key();
+		door = new Door();
 	}
 	
 	public void update() {
 		lvl.update();
+		
 		
 		plr.update();
 		if (plr.collisionActive()) doCollision(plr);
@@ -41,8 +43,14 @@ public class Game {
 			if (e.collisionActive())
 				doCollision(e);
 		}
-		
+
+		door.update();
 		key.update();
+		
+		if (key.targetDoor == null && plr.collision.intersects(door.collision)) {
+			key.targetDoor = door;
+		}		
+		
 		
 		if (plr.collision.intersects(key.collision)) {
 			key.setFollow(plr);
@@ -53,6 +61,8 @@ public class Game {
 	public void paint(Graphics g) {
 		lvl.paint(g);
 
+		door.paint(g);
+		
 		for (GameObject e : objects) {
 			e.paint(g);
 		}
@@ -163,7 +173,7 @@ public class Game {
 		case 'P': plr = new Player(realPos);
 			break; //set player starting position
 		
-		case 'D': 
+		case 'D': door = new Door(realPos);
 			break; //set door position
 		
 		case 'K': key = new Key(realPos);
