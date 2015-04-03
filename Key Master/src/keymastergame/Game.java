@@ -13,14 +13,19 @@ import java.util.Scanner;
 import keymastergame.framework.LevelCollision;
 import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
+import keymastergame.objects.Door;
+import keymastergame.objects.GameObject;
+import keymastergame.objects.Key;
+import keymastergame.objects.Ladder;
+import keymastergame.objects.Player;
 
 public class Game {
 
-	Level lvl;
-	ArrayList<GameObject> objects;
-	Player plr;
-	Door door;
-	Key key;
+	public Level lvl;
+	public ArrayList<GameObject> objects;
+	public Player plr;
+	public Door door;
+	public Key key;
 	
 	//private int playerLives = 3;
 	
@@ -48,7 +53,7 @@ public class Game {
 		door.update();
 		key.update();
 		
-		if (key.targetDoor == null && plr.collision.intersects(door.collision)) {
+		if (key.targetDoor == null && plr.hasKey && plr.collision.intersects(door.collision)) {
 			key.targetDoor = door;
 		}		
 		

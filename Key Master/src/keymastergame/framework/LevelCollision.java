@@ -2,8 +2,8 @@ package keymastergame.framework;
 
 import java.util.Comparator;
 
-import keymastergame.GameObject;
 import keymastergame.Tile;
+import keymastergame.objects.GameObject;
 
 
 public class LevelCollision {

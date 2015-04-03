@@ -1,15 +1,21 @@
-package keymastergame;
+package keymastergame.objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 
+import keymastergame.StartingClass;
 import keymastergame.framework.Box;
+import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
 
 public class Key extends GameObject {
 
-	Player following = null;
-	Door targetDoor = null;
+
+	public static final Vector size = new Vector(16, 16);
+	
+	public Player following = null;
+	public Door targetDoor = null;
 	
 	double maxFollowRange = 40;
 	
@@ -26,7 +32,7 @@ public class Key extends GameObject {
 	boolean active = true;
 	
 	public Key() {
-		collision = new Box(new Vector(0,0), new Vector(16,16));
+		collision = new Box(new Vector(0,0), size);
 		velocity = new Vector(0,0);
 		
 		floatPosY = collision.position.y;
@@ -39,7 +45,7 @@ public class Key extends GameObject {
 
 	public Key(Vector pos) {
 		
-		collision = new Box(pos, new Vector(16,16));
+		collision = new Box(pos, size);
 		velocity = new Vector(0,0);
 		
 		floatPosY = collision.position.y;
@@ -89,20 +95,41 @@ public class Key extends GameObject {
 	public void paint(Graphics g) {
 		
 		if (active) {
-		
-			double tempY = collision.position.y;
+
 			floatPosY = collision.position.y + (Math.sin(floatTime * (360/floatLoopTime) * (Math.PI/180)) * floatAmplitude);
-			collision.position.y = floatPosY;
 			
-			collision.paint(g, Color.RED);
+			if (StartingClass.debugGraphics) {
+
+				double tempY = collision.position.y;
+				collision.position.y = floatPosY;
+				
+				collision.paint(g, Color.RED);
+				
+				collision.position.y = tempY;
 			
-			collision.position.y = tempY;
+			} else {
+				int xPos = (int)(collision.position.x);
+				int yPos = (int)(floatPosY);
+				
+				if (!faceLeft) {
+					g.drawImage(Resource.keySpr, xPos - 14, yPos - 7, null);
+				} else {
+					
+					//vvvv how to flip vvvv
+					
+					g.drawImage(Resource.keySpr, xPos + 14, yPos - 7, -Resource.keySpr.getWidth(null), Resource.keySpr.getHeight(null), null);
+				}
+				
+			}
+			
 		}
 		
 	}
 	
 	public void goTowardsTarget(double range, GameObject obj) {
 
+		
+		
 		Vector diff = new Vector();
 		diff.x = collision.position.x;
 		diff.y = collision.position.y;
@@ -115,13 +142,18 @@ public class Key extends GameObject {
 		double ang = Math.abs(Math.atan(diff.y/diff.x));
 		
 		if (dist > range) {
+			faceLeft = false;
+			
 			double moveDist = dist - range;
 			
 			
 			Vector move = new Vector();
 			
 			move.x = moveDist * Math.cos(ang);
-			if (obj.collision.position.x < collision.position.x) move.x *= -1;
+			if (obj.collision.position.x < collision.position.x) {
+				move.x *= -1;
+				faceLeft = true;
+			}
 								
 			move.y = moveDist * Math.sin(ang);
 			if (obj.collision.position.y < collision.position.y) move.y *= -1;

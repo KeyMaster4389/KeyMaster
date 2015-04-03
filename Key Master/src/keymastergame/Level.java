@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import keymastergame.framework.Vector;
+import keymastergame.objects.Ladder;
 
 public class Level {
 	public ArrayList<Tile> tiles;

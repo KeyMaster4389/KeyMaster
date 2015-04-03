@@ -10,6 +10,7 @@ import keymastergame.framework.Vector;
 
 public class Tile {
 
+	
 	public Box collision;
 	public int gridX;
 	public int gridY;
