@@ -29,7 +29,7 @@ public class Ladder {
 		
 		} else {
 			int xPos = (int)(collision.position.x - StartingClass.TILESIZE/2);
-			int yPos = (int)(collision.position.y - 5);
+			int yPos = (int)(collision.position.y - 7);
 		
 			g.drawImage(Resource.ladderSpr, xPos, yPos, null);
 		}

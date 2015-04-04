@@ -18,6 +18,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	public static final boolean debugGraphics = false;
 	public static int state;
+	
+	public static int frameSpeed = 17;
 	//private Intro introState;
 	public static Game gameState;
 
@@ -101,7 +103,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 			//System.out.println("Game update time: " + (double)(endTime - startTime)/100000  + " milliseconds");
 			try {
-				Thread.sleep(17);
+				Thread.sleep(frameSpeed);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

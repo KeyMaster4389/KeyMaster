@@ -38,6 +38,11 @@ public class Animation {
 			}
 		}
 	}
+	
+	public synchronized void resetAnimation() {
+		animTime = 0;
+		currentFrame = 0;
+	}
 
 	public synchronized Image getImage() {
 		if (frames.size() == 0) {

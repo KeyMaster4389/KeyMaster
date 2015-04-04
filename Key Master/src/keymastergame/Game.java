@@ -57,6 +57,8 @@ public class Game {
 			key.setFollow(plr);
 		}
 		
+		
+		plr.updateAnimation();
 	}
 	
 	public void paint(Graphics g) {

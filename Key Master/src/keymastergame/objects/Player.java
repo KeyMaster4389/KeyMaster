@@ -2,12 +2,15 @@ package keymastergame.objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import keymastergame.StartingClass;
 import keymastergame.Tile;
+import keymastergame.framework.Animation;
 import keymastergame.framework.Box;
+import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
 
 public class Player extends GameObject {
@@ -24,8 +27,19 @@ public class Player extends GameObject {
 	public boolean collisionLeft;
 	
 	*/
-	public static final Vector size = new Vector(24, 30);
+	public static final Vector size = new Vector(18, 24);
 	
+	//animations
+	private int moveState = 0;
+	
+	private Vector imageOffset;
+	
+	private Animation running;
+	private Animation climbing;
+	
+	private static Image currentImage;
+	
+	//gameplay variables
 	public boolean hasKey = false;
 	
 	protected double gravAcc = 0.4;
@@ -62,6 +76,8 @@ public class Player extends GameObject {
 		collision = new Box(new Vector(0,0), size);
 		velocity = new Vector(0,0);
 
+		configureAnimations();
+		
 		collisionUp = false;
 		collisionRight = false;
 		collisionDown = false;
@@ -71,7 +87,9 @@ public class Player extends GameObject {
 	public Player(Vector position) {
 		collision = new Box(position, size);
 		velocity = new Vector(0,0);
-
+		
+		configureAnimations();
+		
 		collisionUp = false;
 		collisionRight = false;
 		collisionDown = false;
@@ -170,18 +188,94 @@ public class Player extends GameObject {
 			}
 		}
 		
-		
-		if (velocity.x < 0) {
-			faceLeft = true;
-		} else if (velocity.x > 0) {
-			faceLeft = false;
-		}
-		
+				
 		collision.position.add(velocity);
 	}
 	
+	public void updateAnimation() {
+		if (collisionUp && !onLadder) {
+			//on ground
+			
+			if (velocity.x == 0) {
+				//idle
+				if (currentImage != Resource.idle) {
+					currentImage = Resource.idle;
+				}
+				
+			} else if (velocity.x > 0) {
+				//run right
+				faceLeft = false;
+				
+				
+				if (moveState != 1) {
+					moveState = 1;
+					running.resetAnimation();
+				}
+				currentImage = running.getImage();
+				
+				running.update(StartingClass.frameSpeed);
+				
+			} else if (velocity.x < 0) {
+				//run left
+				faceLeft = true;
+				
+
+				if (moveState != 1) {
+					moveState = 1;
+					running.resetAnimation();
+				}
+				currentImage = running.getImage();
+				
+				running.update(StartingClass.frameSpeed);
+			}
+		} else if (onLadder) {
+			//on ladder
+
+
+			if (moveState != 2) {
+				moveState = 2;
+				climbing.resetAnimation();
+			}
+
+			currentImage = climbing.getImage();
+			if (velocity.y != 0) {
+				climbing.update(StartingClass.frameSpeed);
+			}
+			
+		} else {
+			//falling
+			currentImage = Resource.air;
+			
+			if (velocity.x < 0) {
+				faceLeft = true;
+			} else if (velocity.x > 0) {
+				faceLeft = false;
+			}
+			
+		}
+		
+	}
+	
 	public void paint(Graphics g) {
-		collision.paint(g, Color.GREEN);
+		
+		if (StartingClass.debugGraphics) {
+			collision.paint(g, Color.GREEN);
+		}  
+			
+		double xPos = collision.position.x;
+		double yPos = collision.position.y;
+			
+		if (!faceLeft) {
+				
+			g.drawImage(currentImage, (int)(xPos - imageOffset.x),  (int)(yPos - imageOffset.y), null);
+			
+		} else {
+			g.drawImage(currentImage, (int)(xPos + imageOffset.x),  (int)(yPos - imageOffset.y),
+					-currentImage.getWidth(null), currentImage.getHeight(null), null);
+		}
+			
+		
+		
 	}
 	
 	public void input(int code, boolean pressed) {
@@ -253,5 +347,30 @@ public class Player extends GameObject {
 	public boolean collisionActive() {
 		//don't collide with tiles if on a ladder
 		return !onLadder;
+	}
+	
+	private void configureAnimations() {
+		
+		imageOffset = new Vector(16,16);
+		
+		running = new Animation();
+		climbing = new Animation();
+		
+		currentImage = Resource.idle;
+		
+		int runtime = 100;
+		int climbtime = 130;
+				
+		System.out.println(Resource.run2);
+		
+		running.addFrame(Resource.run1, runtime);
+		running.addFrame(Resource.run2, runtime);
+		running.addFrame(Resource.run3, runtime);
+		running.addFrame(Resource.run4, runtime);
+		running.addFrame(Resource.run5, runtime);
+		running.addFrame(Resource.run6, runtime);
+		
+		climbing.addFrame(Resource.climb1, climbtime);
+		climbing.addFrame(Resource.climb2, climbtime);
 	}
 }
