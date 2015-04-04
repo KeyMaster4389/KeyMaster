@@ -38,6 +38,24 @@ public class Box {
 		}
 	}
 	
+	public boolean contains(Box b) {
+		double left = position.x - size.x/2;
+		double right = position.x + size.x/2;
+		double top = position.y - size.y/2;
+		double bottom = position.y + size.y/2;
+		
+		double bLeft = b.position.x - b.size.x/2;
+		double bRight = b.position.x + b.size.x/2;
+		double bTop = b.position.y - b.size.y/2;
+		double bBottom = b.position.y + b.size.y/2;
+		
+		if (bLeft >= left && bRight <= right && bTop >= top && bBottom <= bottom)
+			return true;
+		else
+			return false;
+		
+	}
+	
 	public boolean containsWithEdge(Vector p) {
 		if (p.x <= position.x + size.x/2 && p.x >= position.x - size.x/2
 				&& p.y <= position.y + size.y/2 && p.y >= position.y - size.y/2) {

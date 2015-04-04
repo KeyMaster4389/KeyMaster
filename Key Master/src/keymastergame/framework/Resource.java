@@ -29,6 +29,16 @@ public class Resource {
 	public static Image run4;
 	public static Image run5;
 	public static Image run6;
+	public static Image die1;
+	public static Image die2;
+	public static Image die3;
+	public static Image die4;
+	public static Image die5;
+	public static Image die6;
+	public static Image die7;
+	public static Image die8;
+	public static Image die9;
+	public static Image winning;
 	
 	
 	public static boolean loadResources() {
@@ -45,8 +55,18 @@ public class Resource {
 			run4 = ImageIO.read(new File("data/player/run4.png"));
 			run5 = ImageIO.read(new File("data/player/run5.png"));
 			run6 = ImageIO.read(new File("data/player/run6.png"));
+			die1 = ImageIO.read(new File("data/player/die1.png"));
+			die2 = ImageIO.read(new File("data/player/die2.png"));
+			die3 = ImageIO.read(new File("data/player/die3.png"));
+			die4 = ImageIO.read(new File("data/player/die4.png"));
+			die5 = ImageIO.read(new File("data/player/die5.png"));
+			die6 = ImageIO.read(new File("data/player/die6.png"));
+			die7 = ImageIO.read(new File("data/player/die7.png"));
+			die8 = ImageIO.read(new File("data/player/die8.png"));
+			die9 = ImageIO.read(new File("data/player/die9.png"));
+			winning = ImageIO.read(new File("data/player/winning.png"));
 			
-			
+			//everything else
 			background = ImageIO.read(new File("data/background.jpg"));
 			
 			tileSpr = ImageIO.read(new File("data/tile.bmp"));

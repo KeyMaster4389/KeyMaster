@@ -12,7 +12,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import keymastergame.framework.Animation;
+import keymastergame.framework.Box;
 import keymastergame.framework.Resource;
+import keymastergame.framework.Vector;
 
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
@@ -31,13 +33,16 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	
 	public static URL base;
 
-	private final int WINDOWWIDTH = 960;
-	private final int WINDOWHEIGHT = 640;
+	private static final int WINDOWWIDTH = 960;
+	private static final int WINDOWHEIGHT = 640;
 	
 	public static final int LEVELWIDTH = 30;
 	public static final int LEVELHEIGHT = 20;
 	
 	public static final int TILESIZE = 32;
+	
+	public static final Box levelBoundary = new Box(new Vector(StartingClass.WINDOWWIDTH/2, StartingClass.WINDOWHEIGHT/2),
+			new Vector(StartingClass.WINDOWWIDTH, StartingClass.WINDOWHEIGHT));;
 
 	@Override
 	public void init() {
@@ -57,7 +62,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		}
 		
 		gameState = new Game();
-		gameState.loadLevel("data/level1.txt");
 
 		// TODO: Image Setups
 

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import keymastergame.framework.Box;
 import keymastergame.framework.LevelCollision;
 import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
@@ -27,7 +28,16 @@ public class Game {
 	public Door door;
 	public Key key;
 	
-	//private int playerLives = 3;
+	public boolean levelComplete;
+	public int currentLevel; //1, 2, 3
+	
+	private int playerLives;
+	
+	//wait this many frames before loading/reloading a level
+	public static final int reloadLevelDelay = 60;
+	private int reloadLevelTimer;
+	
+	
 	
 	public Game() {
 		objects = new ArrayList<GameObject>();
@@ -35,30 +45,88 @@ public class Game {
 		plr = new Player();
 		key = new Key();
 		door = new Door();
+		
+		levelComplete = false;
+		currentLevel = 1;
+		
+		playerLives = 3;
+		
+		loadLevel();
+		reloadLevelTimer = reloadLevelDelay;
 	}
 	
 	public void update() {
-		lvl.update();
-		
-		
-		plr.update();
-		if (plr.collisionActive()) doCollision(plr);
-		
-		for (GameObject e : objects) {
-			e.update();
-			if (e.collisionActive())
-				doCollision(e);
-		}
+		if (plr.hasWon || plr.isDead) {
 
-		door.update();
-		key.update();
-		
-		if (plr.collision.intersects(key.collision)) {
-			key.setFollow(plr);
-		}
-		
-		
-		plr.updateAnimation();
+			reloadLevelTimer--;
+			
+			if (plr.hasWon) {
+				plr.winUpdate();
+				
+			} else if (plr.isDead)  {
+				plr.dieUpdate();
+				doCollision(plr);
+				
+			}
+			
+			if (reloadLevelTimer == 0) {
+				if (plr.hasWon) {
+					
+					reloadLevelTimer = reloadLevelDelay;
+					levelComplete = true;
+					currentLevel++;
+					if (currentLevel == 4) {
+						//you win!
+						//just do this for now
+						System.out.println("YOU'RE WINNER");
+						currentLevel = 1;
+					}
+					loadLevel();
+					
+				} else if (plr.isDead) {
+					System.out.println("YOU DIED");
+					
+					reloadLevelTimer = reloadLevelDelay;
+					playerLives--;
+					if (playerLives == 0) {
+						//game over
+						//just do this for now
+						System.out.println("GAME OVER :(");
+						currentLevel = 1;
+					} 
+					loadLevel();
+					
+				}
+			}
+			return;
+		} else {
+			lvl.update();
+			
+			plr.update();
+			if (plr.collisionActive()) doCollision(plr);
+			
+			for (GameObject e : objects) {
+				e.update();
+				if (e.collisionActive())
+					doCollision(e);
+			}
+	
+			door.update();
+			key.update();
+			
+			if (plr.collision.intersects(key.collision)) {
+				key.setFollow(plr);
+			}
+			
+			plr.updateAnimation();
+						
+			if (plr.isDead) {
+				plr.die();
+			} else if (door.isOpen && door.collision.contains(plr.collision) && plr.collisionUp) {
+				plr.win();
+			}
+			
+		} 
 	}
 	
 	public void paint(Graphics g) {
@@ -125,9 +193,22 @@ public class Game {
 	}
 	
 	
-	public boolean loadLevel(String path) {
+	public boolean loadLevel() {
+		String path = "data/level1.txt";
+		if (currentLevel == 2) {
+			path = "data/level2.txt";
+		} else if (currentLevel == 3) {
+			path = "data/level3.txt";
+		}
+		
+		
 		lvl.clear();
 		objects.clear();
+		lvl = new Level();
+		plr = new Player();
+		key = new Key();
+		door = new Door();
+		levelComplete = false;
 		
 		try {
 			System.out.println("Reading level file at: " + path);

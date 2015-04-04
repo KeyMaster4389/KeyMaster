@@ -17,7 +17,7 @@ public class Ladder {
 	public Ladder(Vector pos) {
 		
 		int offsetY = (int)((StartingClass.TILESIZE - Player.size.y)/2 - (StartingClass.TILESIZE/2));
-		System.out.println(offsetY);
+		//System.out.println(offsetY);
 		
 		collision = new Box(new Vector(pos.x, pos.y + offsetY), size);
 	}

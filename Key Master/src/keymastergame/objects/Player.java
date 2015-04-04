@@ -36,16 +36,20 @@ public class Player extends GameObject {
 	
 	private Animation running;
 	private Animation climbing;
+	private Animation dying;
+	
 	
 	private static Image currentImage;
 	
 	//gameplay variables
-	public boolean hasKey = false;
+	public boolean hasWon = false;
+	public boolean isDead = false;	//death animation complete
+	public boolean isDying = false;	//in process of completing death animation
 	
-	protected double gravAcc = 0.4;
-	
+	public boolean hasKey = false;	
 	private boolean onLadder = false;
-	
+
+	protected double gravAcc = 0.4;
 	private static double horizontalSpeed = 2.5;
 	private static double ladderSpeed = 2.5; 
 	
@@ -65,7 +69,7 @@ public class Player extends GameObject {
 	public final static int controlDown = KeyEvent.VK_DOWN;
 	public final static int controlAbility = KeyEvent.VK_SPACE;
 	
-	//tile disapear lasts 120 frames
+	//tile disappear lasts 120 frames
 	private int abilityDuration = 120;
 	
 	//countdown variable until player can use ability again
@@ -100,6 +104,14 @@ public class Player extends GameObject {
 	public void update() {
 		velocity.x = 0;
 		
+		if (!StartingClass.levelBoundary.intersects(collision)) {
+			//fallen out of map, die
+			
+			//System.out.println("not in level!");
+			
+			isDead = true;
+			return;
+		}
 		
 		//decrement cooldown
 		if (abilityCooldown > 0) {
@@ -355,13 +367,15 @@ public class Player extends GameObject {
 		
 		running = new Animation();
 		climbing = new Animation();
+		dying = new Animation();
 		
 		currentImage = Resource.idle;
 		
 		int runtime = 100;
 		int climbtime = 130;
+		//sync with reload delay
+		int dietime = StartingClass.gameState.reloadLevelDelay * StartingClass.frameSpeed / 9;
 				
-		System.out.println(Resource.run2);
 		
 		running.addFrame(Resource.run1, runtime);
 		running.addFrame(Resource.run2, runtime);
@@ -372,5 +386,40 @@ public class Player extends GameObject {
 		
 		climbing.addFrame(Resource.climb1, climbtime);
 		climbing.addFrame(Resource.climb2, climbtime);
+		
+		dying.addFrame(Resource.die1, dietime);
+		dying.addFrame(Resource.die2, dietime);
+		dying.addFrame(Resource.die3, dietime);
+		dying.addFrame(Resource.die4, dietime);
+		dying.addFrame(Resource.die5, dietime);
+		dying.addFrame(Resource.die6, dietime);
+		dying.addFrame(Resource.die7, dietime);
+		dying.addFrame(Resource.die8, dietime);
+		dying.addFrame(Resource.die9, dietime);
+	}
+	
+	public void win() {
+		hasWon = true;
+		currentImage = Resource.winning;
+	}
+	
+	public void winUpdate() {		
+		//do nothing
+		velocity.x = 0;
+		velocity.y = 0;
+	}
+	
+	public void die() {
+		isDead = true;
+		dying.resetAnimation();
+		currentImage = dying.getImage();
+	}
+
+	public void dieUpdate() {
+		currentImage = dying.getImage();
+
+		velocity.x = 0;
+		velocity.y += gravAcc;
+		
 	}
 }
