@@ -21,6 +21,7 @@ public class GameObject {
 	public boolean collisionDown;
 	public boolean collisionLeft;
 	
+	public boolean toRemove = false;
 	
 	public GameObject() {
 		collision = new Box(new Vector(0,0), size);

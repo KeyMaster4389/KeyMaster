@@ -65,7 +65,7 @@ public class Tile {
 					
 					if(obj.collision.intersects(collision)) {
 						
-						StartingClass.gameState.objects.remove(obj);
+						obj.toRemove = true;
 						
 					}
 					

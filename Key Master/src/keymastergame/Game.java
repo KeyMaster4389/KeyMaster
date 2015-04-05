@@ -21,11 +21,13 @@ import keymastergame.objects.GameObject;
 import keymastergame.objects.Key;
 import keymastergame.objects.Ladder;
 import keymastergame.objects.Player;
+import keymastergame.objects.enemies.EnemyObject;
 
 public class Game {
 
 	public Level lvl;
 	public ArrayList<GameObject> objects;
+	public ArrayList<GameObject> remove;
 	public Player plr;
 	public Door door;
 	public Key key;
@@ -46,6 +48,8 @@ public class Game {
 
 	public Game() {
 		objects = new ArrayList<GameObject>();
+		remove = new ArrayList<GameObject>(); 
+		
 		lvl = new Level();
 		plr = new Player();
 		key = new Key();
@@ -75,12 +79,38 @@ public class Game {
 			plr.update();
 			if (plr.collisionActive())
 				doCollision(plr);
-
+						
+			remove.clear();
 			for (GameObject e : objects) {
 				e.update();
 				if (e.collisionActive())
 					doCollision(e);
+				
+				if (e instanceof EnemyObject && plr.collision.intersects(e.collision)) {
+					plr.die();
+				}
+				
+				if (!e.collision.intersects(StartingClass.levelBoundary)) {
+					System.out.println("object destroyed!");
+					e.toRemove = true;
+				}
+				
+				if (e.toRemove) {
+					remove.add(e);
+				}
 			}
+			if (!remove.isEmpty()) {
+				for (int i = remove.size() - 1; i >= 0; i--) {
+					for (GameObject obj : objects) {
+						if (obj.equals(remove.get(i))) {
+							objects.remove(obj);
+							break;
+						}
+					}
+				}
+			}
+			
+			
 
 			door.update();
 			key.update();
@@ -328,6 +358,9 @@ public class Game {
 			break; // add enemy type C
 		case 'G':
 			objects.add(new GameObject(realPos));
+			break; // add basic object
+		case 'E':
+			objects.add(new EnemyObject(realPos));
 			break; // add basic object
 		}
 	}
