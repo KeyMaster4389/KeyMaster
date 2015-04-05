@@ -156,7 +156,8 @@ public class Player extends GameObject {
 				velocity.y += gravAcc;
 			}
 			
-		} else {
+		} 
+		if (onLadder) {
 			
 			if (canMountLadder(collision.position)) {
 				//on ladder
@@ -171,7 +172,11 @@ public class Player extends GameObject {
 						Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
 						collision.position.y = ladder.collision.position.y - ladder.collision.size.y/2;
 						
-						if (canDismountLadder()) onLadder = false;
+						if (canDismountLadder()) {
+							onLadder = false;
+							//apply gravity
+							velocity.y += gravAcc;
+						}
 						
 					}
 					
@@ -184,7 +189,11 @@ public class Player extends GameObject {
 						Ladder ladder = StartingClass.gameState.lvl.getLadderFromPoint(collision.position);
 						collision.position.y = ladder.collision.position.y + ladder.collision.size.y/2;
 						
-						if (canDismountLadder()) onLadder = false;
+						if (canDismountLadder()) {
+							onLadder = false;
+							//apply gravity
+							velocity.y += gravAcc;
+						}
 					}
 				}
 	
