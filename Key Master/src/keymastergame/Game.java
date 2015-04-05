@@ -1,5 +1,6 @@
 package keymastergame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.File;
@@ -150,7 +151,7 @@ public class Game {
 		plr.paint(g);
 		
 		key.paint(g);
-		
+
 	}
 	
 	
