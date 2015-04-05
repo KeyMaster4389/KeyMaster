@@ -2,7 +2,6 @@ package keymastergame.objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 
 import keymastergame.StartingClass;
 import keymastergame.framework.Box;
@@ -62,8 +61,7 @@ public class Key extends GameObject {
 		
 			if (targetDoor == null) {
 				if (following == null) {
-					//do nothing	
-		
+					//do nothing
 					
 				} else {
 					//follow player

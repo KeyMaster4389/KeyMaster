@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import keymastergame.StartingClass;
 import keymastergame.Tile;
@@ -15,8 +14,8 @@ import keymastergame.framework.Vector;
 
 public class Player extends GameObject {
 
-	/* variables inherited from GameObject, for reference
-	 
+	/*
+	 //variables inherited from GameObject, for reference
 	public Box collision;
 	public Vector velocity;
 	protected double gravAcc;
@@ -27,6 +26,7 @@ public class Player extends GameObject {
 	public boolean collisionLeft;
 	
 	*/
+	
 	public static final Vector size = new Vector(18, 24);
 	
 	//animations
@@ -158,7 +158,6 @@ public class Player extends GameObject {
 			
 		} else {
 			
-			
 			if (canMountLadder(collision.position)) {
 				//on ladder
 				velocity.y = 0;
@@ -229,7 +228,6 @@ public class Player extends GameObject {
 			} else if (velocity.x < 0) {
 				//run left
 				faceLeft = true;
-				
 
 				if (moveState != 1) {
 					moveState = 1;
@@ -241,7 +239,6 @@ public class Player extends GameObject {
 			}
 		} else if (onLadder) {
 			//on ladder
-
 
 			if (moveState != 2) {
 				moveState = 2;
@@ -281,6 +278,7 @@ public class Player extends GameObject {
 			g.drawImage(currentImage, (int)(xPos - imageOffset.x),  (int)(yPos - imageOffset.y), null);
 			
 		} else {
+			//mirror image
 			g.drawImage(currentImage, (int)(xPos + imageOffset.x),  (int)(yPos - imageOffset.y),
 					-currentImage.getWidth(null), currentImage.getHeight(null), null);
 		}
@@ -290,7 +288,6 @@ public class Player extends GameObject {
 	}
 	
 	public void input(int code, boolean pressed) {
-		//do something here
 		switch (code) {
 		
 		case controlLeft: keyLeft = pressed;

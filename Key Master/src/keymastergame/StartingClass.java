@@ -2,37 +2,42 @@ package keymastergame;
 
 import java.applet.Applet;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
-import java.util.ArrayList;
 
-import keymastergame.framework.Animation;
 import keymastergame.framework.Box;
 import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
 
+@SuppressWarnings("serial")
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	public static final boolean debugGraphics = false;
+	
 	public static int state;
+	public static final int STATE_GAMEPLAY = 0;
+	public static final int STATE_MAINMENU = 1;
+	public static final int STATE_GAMEOVERSCREEN = 2;
+	public static final int STATE_VICTORYSCREEN = 3;
+	
 	
 	public static int frameSpeed = 17;
+	
+	
 	//private Intro introState;
 	public static Game gameState;
-
-	private Thread thread;
 	
-	// for Image variables later
+	// Image variables for double buffering
 	private Image image;
 	private Graphics second;
 	
 	public static URL base;
 
+	
 	private static final int WINDOWWIDTH = 960;
 	private static final int WINDOWHEIGHT = 640;
 	
@@ -58,13 +63,10 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		try {
 			base = getDocumentBase();
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 		
 		gameState = new Game();
-
-		// TODO: Image Setups
-
 
 		Thread thread = new Thread(this);
 		thread.start();
@@ -80,12 +82,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -96,16 +98,16 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			// here we'll call the update methods of the game
 			// objects as well as the animate method.
 
-			long startTime = System.nanoTime();
+			//long startTime = System.nanoTime();
+			
 			gameState.update();
 			
 			
 			repaint();
 			
-
-			long endTime = System.nanoTime();
-
+			//long endTime = System.nanoTime();
 			//System.out.println("Game update time: " + (double)(endTime - startTime)/100000  + " milliseconds");
+			
 			try {
 				Thread.sleep(frameSpeed);
 			} catch (InterruptedException e) {
@@ -154,7 +156,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 

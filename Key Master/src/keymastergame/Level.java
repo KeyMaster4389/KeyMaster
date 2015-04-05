@@ -11,7 +11,7 @@ public class Level {
 	public ArrayList<Ladder> ladders;
 	
 	public Level() {
-		// TODO Auto-generated constructor stub
+		
 		tiles = new ArrayList<Tile>();
 		ladders = new ArrayList<Ladder>();
 	}

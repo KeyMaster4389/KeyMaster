@@ -37,11 +37,8 @@ public class Door extends GameObject{
 		collisionLeft = false;
 	}
 	
-	public void update() {	
-		//System.out.println(collision.position.x + " " + collision.position.y);
-		
-		//do object logic here
-		
+	public void update() {
+		//do nothing
 	}
 	
 	public void paint(Graphics g) {

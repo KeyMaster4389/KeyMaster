@@ -2,7 +2,6 @@ package keymastergame;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.image.ImageObserver;
 
 import keymastergame.framework.Box;
 import keymastergame.framework.Resource;

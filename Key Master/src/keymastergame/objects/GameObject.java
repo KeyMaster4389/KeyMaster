@@ -44,13 +44,8 @@ public class GameObject {
 		collisionLeft = false;
 	}
 	
-	public void update() {	
-		//System.out.println(collision.position.x + " " + collision.position.y);
-		
-		
+	public void update() {		
 		//do object logic here
-		
-		
 		
 		velocity.y += gravAcc;
 		
