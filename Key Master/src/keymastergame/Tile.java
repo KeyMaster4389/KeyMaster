@@ -20,6 +20,9 @@ public class Tile {
 	public boolean openBottom;
 	public boolean openLeft;
 	
+	//when to start flickering
+	private int flickerTime = 30;
+	
 	//flag telling level to recompile collision
 	//flag will get set back to false by level
 	public boolean changedState;
@@ -55,22 +58,7 @@ public class Tile {
 	public void paint(Graphics g) {
 		if (!isDisabled()) {
 			
-			
-			if (StartingClass.debugGraphics) {
-			
-				if ((gridX + gridY) % 2 == 0)
-					collision.paint(g, Color.GREEN);
-				else
-					collision.paint(g, new Color(0,200,0));
-				
-			} else {
-				int xPos = (int)(collision.position.x - StartingClass.TILESIZE/2);
-				int yPos = (int)(collision.position.y - StartingClass.TILESIZE/2);
-				
-				g.drawImage(Resource.tileSpr, xPos, yPos, null);
-				
-			}
-			
+			drawTile(g);
 			
 			g.setColor(Color.BLACK);
 			if (openTop) {
@@ -108,6 +96,25 @@ public class Tile {
 				
 				g.drawLine(x1, y1, x2, y2);
 			}
+			
+		} else if (disableTimer < flickerTime && disableTimer % 3 == 0) {
+			drawTile(g);
+		}
+	}
+	
+	private void drawTile(Graphics g) {
+		if (StartingClass.debugGraphics) {
+		
+			if ((gridX + gridY) % 2 == 0)
+				collision.paint(g, Color.GREEN);
+			else
+				collision.paint(g, new Color(0,200,0));
+			
+		} else {
+			int xPos = (int)(collision.position.x - StartingClass.TILESIZE/2);
+			int yPos = (int)(collision.position.y - StartingClass.TILESIZE/2);
+			
+			g.drawImage(Resource.tileSpr, xPos, yPos, null);
 			
 		}
 	}

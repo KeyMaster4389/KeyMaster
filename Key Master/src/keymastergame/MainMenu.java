@@ -37,11 +37,15 @@ public class MainMenu {
 				System.exit(0);
 			}
 		} else if (keyUp && !keyDown) {
+			keyUp = false;
+			keyDown = false;
 			if (selection > 0) {
 				selection--;
 			}
 			
 		} else if (keyDown && !keyUp) {
+			keyUp = false;
+			keyDown = false;
 			if (selection < SELECTION_COUNT - 1) {
 				selection++;
 			}
