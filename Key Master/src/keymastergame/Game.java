@@ -35,7 +35,8 @@ public class Game {
 	private int playerLives;
 	
 	//wait this many frames before loading/reloading a level
-	public static final int reloadLevelDelay = 60;
+	public static final int reloadLevelDelayLose = 120;
+	public static final int reloadLevelDelayWin = 60;
 	private int reloadLevelTimer;
 	
 	
@@ -53,58 +54,10 @@ public class Game {
 		playerLives = 3;
 		
 		loadLevel();
-		reloadLevelTimer = reloadLevelDelay;
 	}
 	
 	public void update() {
-		if (plr.hasWon || plr.isDead) {
-
-			reloadLevelTimer--;
-			
-			if (plr.hasWon) {
-				plr.winUpdate();
-				
-			} else if (plr.isDead)  {
-				plr.dieUpdate();
-				doCollision(plr);
-				
-			}
-			
-			if (reloadLevelTimer == 0) {
-				if (plr.hasWon) {
-					
-					reloadLevelTimer = reloadLevelDelay;
-					levelComplete = true;
-					currentLevel++;
-					if (currentLevel == 4) {
-						//you win!
-						//just do this for now
-						System.out.println("YOU'RE WINNER");
-						currentLevel = 1;
-					}
-					loadLevel();
-					
-				} else if (plr.isDead) {
-					System.out.println("YOU DIED");
-					
-					reloadLevelTimer = reloadLevelDelay;
-					playerLives--;
-
-					System.out.println("REMAINING LIVES: " + playerLives);
-					
-					if (playerLives == 0) {
-						//game over
-						//just do this for now
-						System.out.println("GAME OVER :(");
-						currentLevel = 1;
-						playerLives = 3;
-					} 
-					loadLevel();
-					
-				}
-			}
-			return;
-		} else {
+		if (!plr.hasWon && !plr.isDead) {
 			lvl.update();
 			
 			plr.update();
@@ -126,12 +79,59 @@ public class Game {
 			plr.updateAnimation();
 						
 			if (plr.isDead) {
+				reloadLevelTimer = reloadLevelDelayLose;
 				plr.die();
 			} else if (door.isOpen && door.collision.contains(plr.collision) && plr.collisionUp) {
+				reloadLevelTimer = reloadLevelDelayWin;
 				plr.win();
 			}
 			
-		} 
+		} else {
+
+			reloadLevelTimer--;
+			
+			if (plr.hasWon) {
+				plr.winUpdate();
+				
+			} else if (plr.isDead)  {
+				plr.dieUpdate();
+				doCollision(plr);
+				
+			}
+			
+			if (reloadLevelTimer <= 0) {
+				if (plr.hasWon) {
+					
+					levelComplete = true;
+					currentLevel++;
+					if (currentLevel == 4) {
+						//you win!
+						//just do this for now
+						System.out.println("YOU'RE WINNER");
+						currentLevel = 1;
+					}
+					loadLevel();
+					
+				} else if (plr.isDead) {
+					System.out.println("YOU DIED");
+					
+					playerLives--;
+
+					System.out.println("REMAINING LIVES: " + playerLives);
+					
+					if (playerLives == 0) {
+						//game over
+						//just do this for now
+						System.out.println("GAME OVER :(");
+						currentLevel = 1;
+						playerLives = 3;
+					} 
+					loadLevel();
+					
+				}
+			}
+			return;
+		}
 	}
 	
 	public void paint(Graphics g) {

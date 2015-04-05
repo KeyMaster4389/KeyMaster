@@ -17,7 +17,7 @@ public class Key extends GameObject {
 	public Player following = null;
 	public Door targetDoor = null;
 	
-	double maxFollowRange = 40;
+	double maxFollowRange = 30;
 	
 	double lockOntoDoorRange = 50;
 	

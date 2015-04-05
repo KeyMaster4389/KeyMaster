@@ -44,7 +44,6 @@ public class Player extends GameObject {
 	//gameplay variables
 	public boolean hasWon = false;
 	public boolean isDead = false;	//death animation complete
-	public boolean isDying = false;	//in process of completing death animation
 	
 	public boolean hasKey = false;	
 	private boolean onLadder = false;
@@ -374,7 +373,7 @@ public class Player extends GameObject {
 		int runtime = 100;
 		int climbtime = 130;
 		//sync with reload delay
-		int dietime = StartingClass.gameState.reloadLevelDelay * StartingClass.frameSpeed / 9;
+		int dietime = 100;
 				
 		
 		running.addFrame(Resource.run1, runtime);
@@ -416,10 +415,14 @@ public class Player extends GameObject {
 	}
 
 	public void dieUpdate() {
+		if (currentImage != Resource.die9)
+			dying.update(StartingClass.frameSpeed);
+		
 		currentImage = dying.getImage();
 
 		velocity.x = 0;
 		velocity.y += gravAcc;
-		
+
+		collision.position.add(velocity);
 	}
 }
