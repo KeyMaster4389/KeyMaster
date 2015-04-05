@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import keymastergame.framework.Box;
 import keymastergame.framework.Resource;
 import keymastergame.framework.Vector;
+import keymastergame.objects.GameObject;
+import keymastergame.objects.Player;
 
 public class Tile {
 
@@ -51,6 +53,25 @@ public class Tile {
 			disableTimer--;
 			if (!isDisabled()) {
 				changedState = true;
+				
+				//do thing here for intersecting gameobjects
+				Player p = StartingClass.gameState.plr;
+				if (p.collision.intersects(collision)) {
+					p.die();
+					//throw player out of screen, to make them "disappear"
+					p.collision.position.y = 1000;
+				}
+				for (GameObject obj : StartingClass.gameState.objects) {
+					
+					if(obj.collision.intersects(collision)) {
+						
+						StartingClass.gameState.objects.remove(obj);
+						
+					}
+					
+				}
+				
+				
 			}
 		}
 	}
