@@ -88,11 +88,15 @@ public class Game {
 					
 					reloadLevelTimer = reloadLevelDelay;
 					playerLives--;
+
+					System.out.println("REMAINING LIVES: " + playerLives);
+					
 					if (playerLives == 0) {
 						//game over
 						//just do this for now
 						System.out.println("GAME OVER :(");
 						currentLevel = 1;
+						playerLives = 3;
 					} 
 					loadLevel();
 					
