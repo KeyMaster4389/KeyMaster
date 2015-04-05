@@ -40,6 +40,15 @@ public class Resource {
 	public static Image die9;
 	public static Image winning;
 	
+	//menus and screens
+	public static Image mainMenuScreen;
+	public static Image menuSelector;
+	public static Image menuNewGame;
+	public static Image menuNewGame_Highlight;
+	public static Image menuQuit;
+	public static Image menuQuit_Highlight;
+	
+	
 	
 	public static boolean loadResources() {
 		try {
@@ -76,7 +85,14 @@ public class Resource {
 			doorClosedSpr = ImageIO.read(new File("data/door_closed.png"));
 			
 			keySpr = ImageIO.read(new File("data/key.png"));
-			
+
+			//menus and screens
+			mainMenuScreen = ImageIO.read(new File("data/menu/mainmenu.bmp"));
+			menuSelector = ImageIO.read(new File("data/menu/selector.png")); 
+			menuQuit = ImageIO.read(new File("data/menu/quit.png")); 
+			menuQuit_Highlight = ImageIO.read(new File("data/menu/quit_highlight.png")); 
+			menuNewGame = ImageIO.read(new File("data/menu/startnew.png")); 
+			menuNewGame_Highlight = ImageIO.read(new File("data/menu/startnew_highlight.png")); 
 			
 		} catch (IOException e) {
 			e.printStackTrace();

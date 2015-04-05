@@ -18,18 +18,23 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	public static final boolean debugGraphics = false;
 	
-	public static int state;
 	public static final int STATE_GAMEPLAY = 0;
 	public static final int STATE_MAINMENU = 1;
 	public static final int STATE_GAMEOVERSCREEN = 2;
 	public static final int STATE_VICTORYSCREEN = 3;
+
+	public static int state;
+	
 	
 	
 	public static int frameSpeed = 17;
 	
 	
-	//private Intro introState;
+	//states;
 	public static Game gameState;
+	public static MainMenu menu;
+	//public static Screen gameOverScreen;
+	//public static Screen victoryScreen;
 	
 	// Image variables for double buffering
 	private Image image;
@@ -47,7 +52,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public static final int TILESIZE = 32;
 	
 	public static final Box levelBoundary = new Box(new Vector(StartingClass.WINDOWWIDTH/2, StartingClass.WINDOWHEIGHT/2),
-			new Vector(StartingClass.WINDOWWIDTH, StartingClass.WINDOWHEIGHT));;
+			new Vector(StartingClass.WINDOWWIDTH, StartingClass.WINDOWHEIGHT));
 
 	@Override
 	public void init() {
@@ -66,7 +71,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			
 		}
 		
-		gameState = new Game();
+		changeState(STATE_MAINMENU);
 
 		Thread thread = new Thread(this);
 		thread.start();
@@ -100,8 +105,14 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 			//long startTime = System.nanoTime();
 			
-			gameState.update();
+			switch (state) {
+				case STATE_GAMEPLAY: if (gameState != null) gameState.update();
+				break;
+				case STATE_MAINMENU: if (menu != null) menu.update();
+				break;
 			
+			
+			}
 			
 			repaint();
 			
@@ -140,18 +151,41 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 		// here will be calls to g.drawImage for
 		// various game objects
-		gameState.paint(g);
 
+		switch (state) {
+			case STATE_GAMEPLAY: if (gameState != null) gameState.paint(g);
+			break;
+			case STATE_MAINMENU: if (menu != null) menu.paint(g);
+			break;
+		
+		
+		
+		}
 	}// end of paint method
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		gameState.readInput(e.getKeyCode(), true);
+		
+
+		switch (state) {
+			case STATE_GAMEPLAY: if (gameState != null) gameState.readInput(e.getKeyCode(), true);
+			break;
+			case STATE_MAINMENU: if (menu != null) menu.readInput(e.getKeyCode(), true);
+			break;
+		
+		
+		}
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		gameState.readInput(e.getKeyCode(), false);
+		switch (state) {
+		case STATE_GAMEPLAY: if (gameState != null) gameState.readInput(e.getKeyCode(), false);
+		break;
+		case STATE_MAINMENU: if (menu != null) menu.readInput(e.getKeyCode(), false);
+		break;
+		}
 	}
 
 	@Override
@@ -159,4 +193,29 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	}
 
+	public static void changeState(int targetState) {
+		
+		gameState = null;
+		menu = null;
+		//gameOverScreen = null;
+		//victoryScreen = null;
+		
+		switch (targetState) {
+		
+		case STATE_GAMEPLAY: state = STATE_GAMEPLAY; gameState = new Game();
+			break;
+
+		case STATE_MAINMENU: state = STATE_MAINMENU; menu = new MainMenu();
+			break;
+			
+		//do nothing for now
+		case STATE_GAMEOVERSCREEN:
+			break;
+			
+		case STATE_VICTORYSCREEN:
+			break;
+		
+		}
+		
+	}
 }
