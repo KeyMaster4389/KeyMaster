@@ -379,7 +379,7 @@ public class Player extends GameObject {
 		int runtime = 100;
 		int climbtime = 130;
 		//sync with reload delay
-		int dietime = 100;
+		int dietime = 120;
 				
 		
 		running.addFrame(Resource.run1, runtime);

@@ -10,7 +10,7 @@ import keymastergame.framework.Vector;
 
 public class Door extends GameObject{
 
-	public static final Vector size = new Vector(28, 32);
+	public static final Vector size = new Vector(32, 32);
 	
 	public boolean isOpen = false;
 	

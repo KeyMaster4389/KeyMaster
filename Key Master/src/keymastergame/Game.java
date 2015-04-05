@@ -69,6 +69,7 @@ public class Game {
 			
 			if (plr.collision.intersects(key.collision)) {
 				key.setFollow(plr);
+				
 			}
 			
 			plr.updateAnimation();
@@ -78,6 +79,7 @@ public class Game {
 				plr.die();
 			} else if (door.isOpen && door.collision.contains(plr.collision) && plr.collisionUp) {
 				reloadLevelTimer = reloadLevelDelayWin;
+				plr.collision.position.x = door.collision.position.x;
 				plr.win();
 			}
 			
