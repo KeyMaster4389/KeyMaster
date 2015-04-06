@@ -48,6 +48,18 @@ public class Resource {
 	public static Image menuQuit;
 	public static Image menuQuit_Highlight;
 	
+	//numbers
+	public static Image zero;
+	public static Image one;
+	public static Image two;
+	public static Image three;
+	public static Image four;
+	public static Image five;
+	public static Image six;
+	public static Image seven;
+	public static Image eight;
+	public static Image nine;
+	public static Image time;
 	
 	
 	public static boolean loadResources() {
@@ -93,6 +105,19 @@ public class Resource {
 			menuQuit_Highlight = ImageIO.read(new File("data/menu/quit_highlight.png")); 
 			menuNewGame = ImageIO.read(new File("data/menu/startnew.png")); 
 			menuNewGame_Highlight = ImageIO.read(new File("data/menu/startnew_highlight.png")); 
+			
+			//numbers
+			zero = ImageIO.read(new File("data/0.png"));
+			one = ImageIO.read(new File("data/1.png"));
+			two = ImageIO.read(new File("data/2.png"));
+			three = ImageIO.read(new File("data/3.png"));
+			four = ImageIO.read(new File("data/4.png"));
+			five = ImageIO.read(new File("data/5.png"));
+			six = ImageIO.read(new File("data/6.png"));
+			seven = ImageIO.read(new File("data/7.png"));
+			eight = ImageIO.read(new File("data/8.png"));
+			nine = ImageIO.read(new File("data/9.png"));
+			time = ImageIO.read(new File("data/time.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();

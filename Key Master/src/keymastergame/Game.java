@@ -1,5 +1,6 @@
 package keymastergame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.FileNotFoundException;
@@ -13,19 +14,13 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import keymastergame.framework.LevelCollision;
-import keymastergame.framework.Resource;
-import keymastergame.framework.Vector;
-import keymastergame.objects.Door;
-import keymastergame.objects.GameObject;
-import keymastergame.objects.Key;
-import keymastergame.objects.Ladder;
-import keymastergame.objects.Player;
-import keymastergame.objects.enemies.EnemyA;
-import keymastergame.objects.enemies.EnemyObject;
+import keymastergame.framework.*;
+import keymastergame.objects.*;
+import keymastergame.objects.enemies.*;
 
 public class Game {
 
+	public Clock gameClock;
 	public Level lvl;
 	public ArrayList<GameObject> objects;
 	public ArrayList<GameObject> remove;
@@ -50,6 +45,8 @@ public class Game {
 	public Game() {
 		objects = new ArrayList<GameObject>();
 		remove = new ArrayList<GameObject>(); 
+		
+		gameClock = new Clock();
 		
 		lvl = new Level();
 		plr = new Player();
@@ -76,7 +73,7 @@ public class Game {
 	public void update() {
 		if (!plr.hasWon && !plr.isDead) {
 			lvl.update();
-
+			gameClock.update();
 			plr.update();
 			if (plr.collisionActive())
 				doCollision(plr);
@@ -123,6 +120,9 @@ public class Game {
 
 			plr.updateAnimation();
 
+			if (gameClock.getTime()) {
+				plr.die();
+			}
 			if (plr.isDead) {
 				reloadLevelTimer = reloadLevelDelayLose;
 				plr.die();
@@ -223,6 +223,12 @@ public class Game {
 		plr.paint(g);
 
 		key.paint(g);
+		
+		//paint HUD
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, StartingClass.WINDOWWIDTH , 32);
+		//paint clock images
+		gameClock.paint(g);
 
 	}
 
@@ -282,6 +288,7 @@ public class Game {
 		plr = new Player();
 		key = new Key();
 		door = new Door();
+		gameClock = new Clock();
 		levelComplete = false;
 
 		try {

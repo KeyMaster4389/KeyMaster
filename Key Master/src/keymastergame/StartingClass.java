@@ -43,8 +43,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public static URL base;
 
 	
-	private static final int WINDOWWIDTH = 960;
-	private static final int WINDOWHEIGHT = 640;
+	public static final int WINDOWWIDTH = 960;
+	public static final int WINDOWHEIGHT = 640;
 	
 	public static final int LEVELWIDTH = 30;
 	public static final int LEVELHEIGHT = 20;
