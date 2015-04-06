@@ -48,17 +48,8 @@ public class Resource {
 	public static Image menuQuit;
 	public static Image menuQuit_Highlight;
 	
-	//numbers
-	public static Image zero;
-	public static Image one;
-	public static Image two;
-	public static Image three;
-	public static Image four;
-	public static Image five;
-	public static Image six;
-	public static Image seven;
-	public static Image eight;
-	public static Image nine;
+	//numbers	
+	public static Image number[];
 	public static Image time;
 	
 	
@@ -107,16 +98,17 @@ public class Resource {
 			menuNewGame_Highlight = ImageIO.read(new File("data/menu/startnew_highlight.png")); 
 			
 			//numbers
-			zero = ImageIO.read(new File("data/0.png"));
-			one = ImageIO.read(new File("data/1.png"));
-			two = ImageIO.read(new File("data/2.png"));
-			three = ImageIO.read(new File("data/3.png"));
-			four = ImageIO.read(new File("data/4.png"));
-			five = ImageIO.read(new File("data/5.png"));
-			six = ImageIO.read(new File("data/6.png"));
-			seven = ImageIO.read(new File("data/7.png"));
-			eight = ImageIO.read(new File("data/8.png"));
-			nine = ImageIO.read(new File("data/9.png"));
+			number = new Image[10];
+			number[0] = ImageIO.read(new File("data/0.png"));
+			number[1] = ImageIO.read(new File("data/1.png"));
+			number[2] = ImageIO.read(new File("data/2.png"));
+			number[3] = ImageIO.read(new File("data/3.png"));
+			number[4] = ImageIO.read(new File("data/4.png"));
+			number[5] = ImageIO.read(new File("data/5.png"));
+			number[6] = ImageIO.read(new File("data/6.png"));
+			number[7] = ImageIO.read(new File("data/7.png"));
+			number[8] = ImageIO.read(new File("data/8.png"));
+			number[9] = ImageIO.read(new File("data/9.png"));
 			time = ImageIO.read(new File("data/time.png"));
 			
 		} catch (IOException e) {
