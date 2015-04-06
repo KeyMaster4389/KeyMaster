@@ -36,7 +36,7 @@ public class EnemyObject extends GameObject {
 		collisionLeft = false;
 	}
 	
-	public void update() {		
+	public void update() {
 		velocity.y += gravAcc;
 		
 		act();
@@ -48,12 +48,12 @@ public class EnemyObject extends GameObject {
 		collision.paint(g, Color.RED);
 	}
 	
-	public void act () {
+	protected void act () {
 		//do enemy logic
 		
 	}
 	
-	public void facePlayer() {
+	protected void facePlayer() {
 		double plrPosX = StartingClass.gameState.plr.collision.position.x;
 		
 		if (plrPosX > collision.position.x) {

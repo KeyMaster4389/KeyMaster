@@ -128,7 +128,7 @@ public class Level {
 	public Tile getTileFromPoint(Vector point) {
 
 		for (Tile t : tiles) {
-			if (!t.isDisabled() && t.collision.contains(point)) {
+			if (!t.isDisabled() && t.collision.containsWithEdge(point)) {
 				return t;
 			}
 		}

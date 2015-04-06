@@ -21,6 +21,7 @@ import keymastergame.objects.GameObject;
 import keymastergame.objects.Key;
 import keymastergame.objects.Ladder;
 import keymastergame.objects.Player;
+import keymastergame.objects.enemies.EnemyA;
 import keymastergame.objects.enemies.EnemyObject;
 
 public class Game {
@@ -348,7 +349,8 @@ public class Game {
 			key = new Key(realPos);
 			break; // set key position
 
-		case 'A':
+		case 'A': 
+			objects.add(new EnemyA(realPos));
 			break; // add enemy type A
 
 		case 'B':
