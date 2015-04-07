@@ -96,7 +96,7 @@ public class Clock {
 	
 	public void paint(Graphics g) {
 		Vector offset = new Vector(5,3);
-		g.drawImage(Resource.time, (int)(StartingClass.WINDOWWIDTH - 185 + offset.x), (int)offset.y, null);
+		g.drawImage(Resource.time, (int)(StartingClass.WINDOWWIDTH - 164 + offset.x), (int)offset.y - 3, null);
 		g.drawImage(timeImage2, (int)(StartingClass.WINDOWWIDTH - 96 + offset.x), (int)offset.y, null);
 		g.drawImage(timeImage1, (int)(StartingClass.WINDOWWIDTH - 73 + offset.x), (int)offset.y, null);
 		g.drawImage(timeImage0, (int)(StartingClass.WINDOWWIDTH - 50 + offset.x), (int)offset.y, null);

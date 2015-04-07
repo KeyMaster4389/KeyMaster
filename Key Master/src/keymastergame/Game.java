@@ -71,6 +71,8 @@ public class Game {
 	}
 
 	public void update() {
+		
+		
 		if (!plr.hasWon && !plr.isDead) {
 			lvl.update();
 			gameClock.update();
@@ -209,8 +211,10 @@ public class Game {
 
 	public void paint(Graphics g) {
 
-		g.drawImage(Resource.background, 0, 0, null);
-
+		//g.drawImage(Resource.background, 0, 0, null);
+		g.setColor(new Color(10, 55, 89));
+		g.fillRect(0, 0, (int)StartingClass.WINDOWWIDTH, (int)StartingClass.WINDOWHEIGHT);
+		
 		lvl.paint(g);
 
 		door.paint(g);
@@ -229,7 +233,18 @@ public class Game {
 		g.fillRect(0, 0, StartingClass.WINDOWWIDTH , 32);
 		//paint clock images
 		gameClock.paint(g);
+		
+		//paint level number
+		g.drawImage(Resource.level, StartingClass.WINDOWWIDTH/2 - 60, 0, null);
+		g.drawImage(Resource.number[currentLevel], StartingClass.WINDOWWIDTH/2 + 30, 3, null);
+		
+		
+		//paint life count
+		if (playerLives < 0) playerLives = 0;
+		else if (playerLives > 9) playerLives = 9;
 
+		g.drawImage(Resource.lives, 16, 0, null);
+		g.drawImage(Resource.number[playerLives], 96, 3, null);
 	}
 
 	public void readInput(int code, boolean pressed) {
