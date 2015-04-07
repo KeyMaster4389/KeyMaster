@@ -210,10 +210,6 @@ public class Game {
 	}
 
 	public void paint(Graphics g) {
-
-		//g.drawImage(Resource.background, 0, 0, null);
-		g.setColor(new Color(10, 55, 89));
-		g.fillRect(0, 0, (int)StartingClass.WINDOWWIDTH, (int)StartingClass.WINDOWHEIGHT);
 		
 		lvl.paint(g);
 

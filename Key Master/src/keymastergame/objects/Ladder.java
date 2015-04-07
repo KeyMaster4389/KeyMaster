@@ -25,7 +25,7 @@ public class Ladder {
 	public void paint(Graphics g) {
 		
 		if (StartingClass.debugGraphics) {
-		collision.paint(g, new Color(0, 0, 255, 150));
+		collision.paint(g, Color.CYAN);
 		
 		} else {
 			int xPos = (int)(collision.position.x - StartingClass.TILESIZE/2);

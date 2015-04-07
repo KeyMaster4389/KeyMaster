@@ -1,5 +1,6 @@
 package keymastergame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -9,9 +10,10 @@ import keymastergame.objects.Ladder;
 public class Level {
 	public ArrayList<Tile> tiles;
 	public ArrayList<Ladder> ladders;
+	private Color bgColor;
 	
 	public Level() {
-		
+		bgColor = new Color(10, 55, 89);
 		tiles = new ArrayList<Tile>();
 		ladders = new ArrayList<Ladder>();
 	}
@@ -37,6 +39,11 @@ public class Level {
 	}
 	
 	public void paint(Graphics g) {
+		//g.drawImage(Resource.background, 0, 0, null);
+		
+		g.setColor(bgColor);
+		g.fillRect(0, 0, (int)StartingClass.WINDOWWIDTH, (int)StartingClass.WINDOWHEIGHT);
+		
 		for (Tile t : tiles) {
 			t.paint(g);
 		}

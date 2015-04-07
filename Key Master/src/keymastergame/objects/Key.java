@@ -105,12 +105,7 @@ public class Key extends GameObject {
 			
 			if (StartingClass.debugGraphics) {
 
-				double tempY = collision.position.y;
-				collision.position.y = floatPosY;
-				
-				collision.paint(g, Color.RED);
-				
-				collision.position.y = tempY;
+				collision.paint(g, Color.YELLOW);
 			
 			} else {
 				int xPos = (int)(collision.position.x);
