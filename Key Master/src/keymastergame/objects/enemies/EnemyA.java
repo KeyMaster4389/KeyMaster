@@ -51,7 +51,7 @@ public class EnemyA extends EnemyObject {
 		if(collisionUp) {
 			Player plr = StartingClass.gameState.plr;
 			facePlayer();
-			if (plr.collisionUp && plr.collision.position.y + plr.collision.size.y/2 == collision.position.y + collision.size.y/2) {
+			if (Math.abs((plr.collision.position.y + plr.collision.size.y/2) - (collision.position.y + collision.size.y/2)) < 10) {
 				//on same height
 				//check if there are tiles between here and the player
 				
