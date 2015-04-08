@@ -10,6 +10,7 @@ import keymastergame.Tile;
 import keymastergame.framework.Animation;
 import keymastergame.framework.Box;
 import keymastergame.framework.Resource;
+import keymastergame.framework.Sound;
 import keymastergame.framework.Vector;
 
 public class Player extends GameObject {
@@ -335,6 +336,8 @@ public class Player extends GameObject {
 		Tile t2 = StartingClass.gameState.lvl.getTileFromPoint(removePoint);
 		
 		if (t1 == null && t2 != null) {
+			
+			Sound.TILE.play();
 			t2.setDisabled(abilityDuration);
 			
 			abilityCooldown = abilityDuration;
