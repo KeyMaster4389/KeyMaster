@@ -32,11 +32,11 @@ public class MainMenu {
 	public void update() {
 		if (keySelect) {
 			if (selection == SELECT_NEWGAME) {
-				Sound.TILE.play();
+				Sound.MENU.play();
 				StartingClass.changeState(StartingClass.STATE_GAMEPLAY);
 			}
 			if (selection == SELECT_QUIT) {
-				Sound.TILE.play();
+				Sound.MENU.play();
 				System.exit(0);
 			}
 		} else if (keyUp && !keyDown) {

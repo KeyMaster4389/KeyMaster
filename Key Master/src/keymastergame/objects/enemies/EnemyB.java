@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import keymastergame.StartingClass;
 import keymastergame.Tile;
 import keymastergame.framework.Box;
+import keymastergame.framework.Sound;
 import keymastergame.framework.Vector;
 import keymastergame.objects.Player;
 
@@ -18,8 +19,10 @@ public class EnemyB extends EnemyObject{
 	
 	private double moveSpeed = 4;
 	
-	private double jumpDisable = 60;
-	private double jumpTimer = 0;
+	private int jumpDisable = 30;
+	private int breakDisable = 70;
+	private int tileDisable = 90;
+	private int jumpTimer = 0;
 	
 	public EnemyB() {
 		collision = new Box(new Vector(0,0), size);
@@ -85,9 +88,10 @@ public class EnemyB extends EnemyObject{
 				//destroy block(s) above us
 				Tile t = StartingClass.gameState.lvl.getTileFromPoint(new Vector(collision.position.x, collision.position.y - StartingClass.TILESIZE));
 				if (t != null) {
-					t.setDisabled(120);
+					t.setDisabled(tileDisable);
 					//be stunned for 90 frames
-					waitTimer = 90;
+					waitTimer = breakDisable;
+					Sound.TILE_REMOVE.play();
 				}
 			}
 		}		

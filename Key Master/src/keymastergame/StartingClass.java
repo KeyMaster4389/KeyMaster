@@ -7,10 +7,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import keymastergame.framework.Box;
 import keymastergame.framework.Resource;
+import keymastergame.framework.Sound;
 import keymastergame.framework.Vector;
 
 @SuppressWarnings("serial")
@@ -24,8 +26,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public static final int STATE_VICTORYSCREEN = 3;
 
 	public static int state;
-	
-	
 	
 	public static int frameSpeed = 17;
 	
@@ -58,6 +58,23 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public void init() {
 		
 		Resource.loadResources();
+		
+		//initial sounds
+		try {
+			Sound.DIE = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/die.wav"));
+			Sound.WIN = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/win.wav"));
+			Sound.TILE_REMOVE = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/tile_remove.wav"));
+			Sound.TILE_REAPPEAR = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/tile_reappear.wav"));
+			Sound.GAMEOVER = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/gameover.wav"));
+			Sound.MUSIC = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/music.wav"));
+			Sound.MENU = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/menu.wav"));
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 		
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
 		setBackground(Color.WHITE);

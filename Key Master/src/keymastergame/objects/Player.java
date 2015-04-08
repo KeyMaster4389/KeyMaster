@@ -337,7 +337,7 @@ public class Player extends GameObject {
 		
 		if (t1 == null && t2 != null) {
 			
-			Sound.TILE.play();
+			Sound.TILE_REMOVE.play();
 			t2.setDisabled(abilityDuration);
 			
 			abilityCooldown = abilityDuration;
@@ -407,6 +407,10 @@ public class Player extends GameObject {
 	}
 	
 	public void win() {
+
+		Sound.MUSIC.stop();
+		Sound.WIN.play();
+		
 		hasWon = true;
 		currentImage = Resource.winning;
 	}
@@ -421,6 +425,9 @@ public class Player extends GameObject {
 		isDead = true;
 		dying.resetAnimation();
 		currentImage = dying.getImage();
+
+		Sound.MUSIC.stop();
+		Sound.DIE.play();
 	}
 
 	public void dieUpdate() {

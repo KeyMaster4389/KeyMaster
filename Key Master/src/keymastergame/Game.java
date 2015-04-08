@@ -183,7 +183,6 @@ public class Game {
 
 				} else if (plr.isDead) {
 					System.out.println("YOU DIED");
-					Sound.DIE.play();
 
 					playerLives--;
 					
@@ -338,7 +337,7 @@ public class Game {
 
 		lvl.generateLevelCollision();
 		
-		Sound.MUSIC.play();
+		Sound.MUSIC.loop();
 
 		return true;
 	}

@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import keymastergame.framework.Box;
+import keymastergame.framework.LevelCollision;
 import keymastergame.framework.Resource;
+import keymastergame.framework.Sound;
 import keymastergame.framework.Vector;
 import keymastergame.objects.GameObject;
 import keymastergame.objects.Player;
@@ -49,6 +51,10 @@ public class Tile {
 	}
 
 	public void update() {
+		
+		if (disableTimer == 30)
+			Sound.TILE_REAPPEAR.play();
+		
 		if (isDisabled()) {
 			disableTimer--;
 			if (!isDisabled()) {
@@ -57,9 +63,15 @@ public class Tile {
 				//do thing here for intersecting gameobjects
 				Player p = StartingClass.gameState.plr;
 				if (p.collision.intersects(collision)) {
-					p.die();
-					//throw player out of screen, to make them "disappear"
-					p.collision.position.y = 1000;
+					
+					LevelCollision col = new LevelCollision(p, this);
+					System.out.println(col.magnitude);
+					if (Math.abs(col.magnitude) > 5) {
+						p.die();
+						p.collision.position.y = 1000;
+						
+						//throw player out of screen, to make them "disappear"
+					}
 				}
 				for (GameObject obj : StartingClass.gameState.objects) {
 					
