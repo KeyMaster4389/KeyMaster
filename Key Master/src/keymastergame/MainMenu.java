@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import keymastergame.framework.Resource;
+import keymastergame.framework.Sound;
 
 public class MainMenu {
 	//main menu of the game, from here player can start new game or quit game
@@ -31,9 +32,11 @@ public class MainMenu {
 	public void update() {
 		if (keySelect) {
 			if (selection == SELECT_NEWGAME) {
+				Sound.TILE.play();
 				StartingClass.changeState(StartingClass.STATE_GAMEPLAY);
 			}
 			if (selection == SELECT_QUIT) {
+				Sound.TILE.play();
 				System.exit(0);
 			}
 		} else if (keyUp && !keyDown) {

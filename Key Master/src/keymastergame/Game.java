@@ -183,6 +183,7 @@ public class Game {
 
 				} else if (plr.isDead) {
 					System.out.println("YOU DIED");
+					Sound.DIE.play();
 
 					playerLives--;
 					
@@ -197,6 +198,7 @@ public class Game {
 						// game over
 						// just do this for now
 						System.out.println("GAME OVER :(");
+						Sound.GAMEOVER.play();
 
 						int result = JOptionPane.showConfirmDialog(null,
 										"         \t         Oh no!!\nYou have been defeated by\n     \t  the evil Key Master!!\nWould you like to play again?",
@@ -335,6 +337,8 @@ public class Game {
 		}
 
 		lvl.generateLevelCollision();
+		
+		Sound.MUSIC.play();
 
 		return true;
 	}
