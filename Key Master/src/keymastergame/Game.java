@@ -22,8 +22,9 @@ public class Game {
 
 	public Clock gameClock;
 	public Level lvl;
-	public ArrayList<GameObject> objects;
-	public ArrayList<GameObject> remove;
+	public static ArrayList<GameObject> objects;
+	public ArrayList<GameObject> removeObj;
+	public ArrayList<GameObject> addObj;
 	public Player plr;
 	public Door door;
 	public Key key;
@@ -44,7 +45,8 @@ public class Game {
 
 	public Game() {
 		objects = new ArrayList<GameObject>();
-		remove = new ArrayList<GameObject>(); 
+		removeObj = new ArrayList<GameObject>(); 
+		addObj = new ArrayList<GameObject>();
 		
 		gameClock = new Clock();
 		
@@ -80,7 +82,8 @@ public class Game {
 			if (plr.collisionActive())
 				doCollision(plr);
 						
-			remove.clear();
+			removeObj.clear();
+			
 			for (GameObject e : objects) {
 				e.update();
 				if (e.collisionActive())
@@ -88,6 +91,9 @@ public class Game {
 				
 				if (e instanceof EnemyObject && plr.collision.intersects(e.collision)) {
 					plr.die();
+					if (e instanceof Projectile) {
+						e.toRemove = true;
+					}
 				}
 				
 				if (!e.collision.intersects(StartingClass.levelBoundary)) {
@@ -96,20 +102,22 @@ public class Game {
 				}
 				
 				if (e.toRemove) {
-					remove.add(e);
+					removeObj.add(e);
 				}
 			}
-			if (!remove.isEmpty()) {
-				for (int i = remove.size() - 1; i >= 0; i--) {
+			if (!removeObj.isEmpty()) {
+				for (int i = removeObj.size() - 1; i >= 0; i--) {
 					for (GameObject obj : objects) {
-						if (obj.equals(remove.get(i))) {
+						if (obj.equals(removeObj.get(i))) {
 							objects.remove(obj);
 							break;
 						}
 					}
 				}
 			}
-			
+
+			objects.addAll(addObj);
+			addObj.clear();
 			
 
 			door.update();
@@ -331,6 +339,7 @@ public class Game {
 		return true;
 	}
 
+	
 	private void addToGame(char c, Vector pos) {
 
 		// convert grid position to actual position in pixels
@@ -376,7 +385,9 @@ public class Game {
 			break; // add enemy type B
 
 		case 'C':
+			objects.add(new EnemyC(realPos));
 			break; // add enemy type C
+			
 		case 'G':
 			objects.add(new GameObject(realPos));
 			break; // add basic object
