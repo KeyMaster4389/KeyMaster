@@ -372,6 +372,7 @@ public class Game {
 			break; // add enemy type A
 
 		case 'B':
+			objects.add(new EnemyB(realPos));
 			break; // add enemy type B
 
 		case 'C':
@@ -380,7 +381,7 @@ public class Game {
 			objects.add(new GameObject(realPos));
 			break; // add basic object
 		case 'E':
-			objects.add(new EnemyObject(realPos));
+			//objects.add(new EnemyObject(realPos));
 			break; // add basic object
 		}
 	}

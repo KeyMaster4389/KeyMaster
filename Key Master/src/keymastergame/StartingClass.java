@@ -40,7 +40,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	private Image image;
 	private Graphics second;
 	
-	public static URL base;
+	//public static URL base;
 
 	
 	public static final int WINDOWWIDTH = 960;
@@ -65,11 +65,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		addKeyListener(this);
 		Frame frame = (Frame) this.getParent().getParent();
 		frame.setTitle("Key Master");
-		try {
-			base = getDocumentBase();
-		} catch (Exception e) {
+		
+		//try {
+		//	base = getDocumentBase();
+		//} catch (Exception e) {
 			
-		}
+		//}
 		
 		changeState(STATE_MAINMENU);
 

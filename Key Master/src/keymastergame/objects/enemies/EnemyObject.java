@@ -8,7 +8,7 @@ import keymastergame.framework.Box;
 import keymastergame.framework.Vector;
 import keymastergame.objects.GameObject;
 
-public class EnemyObject extends GameObject {	
+public abstract class EnemyObject extends GameObject {	
 
 	public static final Vector size = new Vector(24, 28);
 	public int waitTimer = 0;
@@ -39,19 +39,15 @@ public class EnemyObject extends GameObject {
 	public void update() {
 		velocity.y += gravAcc;
 		
-		act();
+		if (waitTimer == 0) act();
+		else waitTimer--;
 			
 		collision.position.add(velocity);
 	}
 	
-	public void paint(Graphics g) {
-		collision.paint(g, Color.RED);
-	}
+	public abstract void paint(Graphics g);
 	
-	protected void act () {
-		//do enemy logic
-		
-	}
+	protected abstract void act();
 	
 	protected void facePlayer() {
 		double plrPosX = StartingClass.gameState.plr.collision.position.x;
