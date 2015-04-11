@@ -207,8 +207,10 @@ public class Game {
 						if (result == JOptionPane.YES_OPTION) {
 							currentLevel = 1;
 							playerLives = 3;
-						} else
+						} else {
 							StartingClass.changeState(StartingClass.STATE_MAINMENU);
+							return;
+						}
 					}
 					loadLevel();
 
@@ -336,7 +338,6 @@ public class Game {
 		}
 
 		lvl.generateLevelCollision();
-		
 		Sound.MUSIC.loop();
 
 		return true;

@@ -63,11 +63,11 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		try {
 			Sound.DIE = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/die.wav"));
 			Sound.WIN = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/win.wav"));
+			Sound.MENU = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/menu.wav"));
 			Sound.TILE_REMOVE = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/tile_remove.wav"));
 			Sound.TILE_REAPPEAR = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/tile_reappear.wav"));
 			Sound.GAMEOVER = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/gameover.wav"));
 			Sound.MUSIC = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/music.wav"));
-			Sound.MENU = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/menu.wav"));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
