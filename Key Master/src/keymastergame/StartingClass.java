@@ -67,13 +67,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			Sound.TILE_REMOVE = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/tile_remove.wav"));
 			Sound.TILE_REAPPEAR = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/tile_reappear.wav"));
 			Sound.GAMEOVER = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/gameover.wav"));
-			Sound.MUSIC = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/music.wav"));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+		Sound.setUpMusic(getCodeBase() + "/data/sounds/music.wav");
 		
 		
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
@@ -110,7 +109,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void destroy() {
-		
+
+		Sound.closeMusic();
 	}
 
 	@Override

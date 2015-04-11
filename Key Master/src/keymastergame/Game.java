@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -338,7 +339,9 @@ public class Game {
 		}
 
 		lvl.generateLevelCollision();
-		Sound.MUSIC.loop();
+		//restart music from beginning
+		Sound.MUSIC.setFramePosition(0);
+		Sound.MUSIC.loop(Clip.LOOP_CONTINUOUSLY);
 
 		return true;
 	}
