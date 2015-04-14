@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -208,10 +207,8 @@ public class Game {
 						if (result == JOptionPane.YES_OPTION) {
 							currentLevel = 1;
 							playerLives = 3;
-						} else {
+						} else
 							StartingClass.changeState(StartingClass.STATE_MAINMENU);
-							return;
-						}
 					}
 					loadLevel();
 
@@ -339,9 +336,8 @@ public class Game {
 		}
 
 		lvl.generateLevelCollision();
-		//restart music from beginning
-		Sound.MUSIC.setFramePosition(0);
-		Sound.MUSIC.loop(Clip.LOOP_CONTINUOUSLY);
+		
+		Sound.MUSIC.loop();
 
 		return true;
 	}

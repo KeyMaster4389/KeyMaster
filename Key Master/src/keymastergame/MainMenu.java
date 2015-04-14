@@ -36,7 +36,7 @@ public class MainMenu {
 				StartingClass.changeState(StartingClass.STATE_GAMEPLAY);
 			}
 			if (selection == SELECT_QUIT) {
-				//Sound.MENU.play();
+				Sound.MENU.play();
 				System.exit(0);
 			}
 		} else if (keyUp && !keyDown) {
