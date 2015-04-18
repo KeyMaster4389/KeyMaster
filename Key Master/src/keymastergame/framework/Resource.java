@@ -40,6 +40,23 @@ public class Resource {
 	public static Image die9;
 	public static Image winning;
 	
+	//Enemy A
+	public static Image enemyALeft1;
+	public static Image enemyALeft2;
+	public static Image enemyALeft3;
+	public static Image enemyALeft4;
+	public static Image enemyALeft5;
+	public static Image enemyALeft6;
+	public static Image enemyALeft7;
+	public static Image enemyARight1;
+	public static Image enemyARight2;
+	public static Image enemyARight3;
+	public static Image enemyARight4;
+	public static Image enemyARight5;
+	public static Image enemyARight6;
+	public static Image enemyARight7;
+	
+	
 	//Enemy C
 	public static Image enemyCLeft1;
 	public static Image enemyCLeft2;
@@ -104,6 +121,22 @@ public class Resource {
 			winning = ImageIO.read(new File("data/player/winning.png"));
 			
 			//Enemy A
+			enemyALeft1 = ImageIO.read(new File("data/enemies/el1.png"));
+			enemyALeft2 = ImageIO.read(new File("data/enemies/el2.png"));
+			enemyALeft3 = ImageIO.read(new File("data/enemies/el3.png"));
+			enemyALeft4 = ImageIO.read(new File("data/enemies/el4.png"));
+			enemyALeft5 = ImageIO.read(new File("data/enemies/el5.png"));
+			enemyALeft6 = ImageIO.read(new File("data/enemies/el6.png"));
+			enemyALeft7 = ImageIO.read(new File("data/enemies/el7.png"));
+			enemyARight1 = ImageIO.read(new File("data/enemies/er1.png"));
+			enemyARight2 = ImageIO.read(new File("data/enemies/er2.png"));
+			enemyARight3 = ImageIO.read(new File("data/enemies/er3.png"));
+			enemyARight4 = ImageIO.read(new File("data/enemies/er4.png"));
+			enemyARight5 = ImageIO.read(new File("data/enemies/er5.png"));
+			enemyARight6 = ImageIO.read(new File("data/enemies/er6.png"));
+			enemyARight7 = ImageIO.read(new File("data/enemies/er7.png"));
+			
+			//Enemy C
 			enemyCLeft1 = ImageIO.read(new File("data/enemies/e2l1.png"));
 			enemyCLeft2 = ImageIO.read(new File("data/enemies/e2l2.png"));
 			enemyCLeft3 = ImageIO.read(new File("data/enemies/e2l3.png"));

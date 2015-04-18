@@ -12,6 +12,7 @@ import keymastergame.framework.Vector;
 import keymastergame.objects.Player;
 
 public class EnemyC extends EnemyObject {
+	//behavior: shooter
 
 	private int shootSpeed = 90;
 	private int shootTimer = 0;
@@ -36,8 +37,6 @@ public class EnemyC extends EnemyObject {
 		collisionRight = false;
 		collisionDown = false;
 		collisionLeft = false;
-
-		//facePlayer();
 
 	}
 
@@ -100,19 +99,6 @@ public class EnemyC extends EnemyObject {
 
 			g.drawImage(currentImage, (int) (xPos - imageOffset.x),
 					(int) (yPos - imageOffset.y), null);
-
-//			if (!faceLeft) {
-//
-//				g.drawImage(currentImage, (int) (xPos - imageOffset.x),
-//						(int) (yPos - imageOffset.y), null);
-//
-//			} else {
-//				// mirror image
-//				g.drawImage(currentImage, (int) (xPos + imageOffset.x),
-//						(int) (yPos - imageOffset.y),
-//						-currentImage.getWidth(null),
-//						currentImage.getHeight(null), null);
-//			}
 
 		}
 	}

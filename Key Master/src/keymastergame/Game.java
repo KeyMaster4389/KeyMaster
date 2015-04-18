@@ -89,6 +89,11 @@ public class Game {
 				
 				if(e instanceof EnemyC)
 					((EnemyC) e).updateAnimation();
+				
+				if(e instanceof EnemyA)
+					((EnemyA) e).updateAnimation();
+				
+				
 
 				if (e instanceof EnemyObject
 						&& plr.collision.intersects(e.collision)) {
