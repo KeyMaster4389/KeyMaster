@@ -78,6 +78,9 @@ public class MainMenu {
 		//draw pointer
 		int y = 250 + selection * 50;
 		g.drawImage(Resource.menuSelector, 140, y, null);		
+		
+		//draw menu key
+		g.drawImage(Resource.menuKey, 320, 380, null);
 	}
 	
 	public void readInput(int code, boolean pressed) {
