@@ -50,6 +50,12 @@ public class Resource {
 	
 	public static Image menuKey;
 	
+	//game over screen
+	public static Image blackBackground;
+	public static Image gameOver;
+	public static Image tryAgain;
+	public static Image credits;
+	
 	//hud stuff	
 	public static Image number[];
 	public static Image time;
@@ -102,6 +108,12 @@ public class Resource {
 			menuNewGame_Highlight = ImageIO.read(new File("data/menu/startnew_highlight.png"));
 			
 			menuKey = ImageIO.read(new File("data/menu/keymenu2.png"));
+			
+			//game over screen
+			blackBackground = ImageIO.read(new File("data/menu/blackbackground.png"));
+			gameOver = ImageIO.read(new File("data/menu/gameover.png"));
+			tryAgain = ImageIO.read(new File("data/menu/tryagain.png"));
+			credits = ImageIO.read(new File("data/menu/credits5.png"));
 			
 			//hud stuff
 			number = new Image[10];

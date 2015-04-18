@@ -33,7 +33,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	//states;
 	public static Game gameState;
 	public static MainMenu menu;
-	//public static Screen gameOverScreen;
+	public static GameOver gameOverScreen;
 	//public static Screen victoryScreen;
 	
 	// Image variables for double buffering
@@ -128,6 +128,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				break;
 				case STATE_MAINMENU: if (menu != null) menu.update();
 				break;
+				case STATE_GAMEOVERSCREEN: if(gameOverScreen != null) gameOverScreen.update();
 			
 			
 			}
@@ -175,6 +176,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			break;
 			case STATE_MAINMENU: if (menu != null) menu.paint(g);
 			break;
+			case STATE_GAMEOVERSCREEN: if(gameOverScreen != null) gameOverScreen.paint(g);
+			break;
 		
 		
 		
@@ -190,6 +193,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			break;
 			case STATE_MAINMENU: if (menu != null) menu.readInput(e.getKeyCode(), true);
 			break;
+			case STATE_GAMEOVERSCREEN: if (gameOverScreen != null) gameOverScreen.readInput(e.getKeyCode(), true);
+			break;
 		
 		
 		}
@@ -203,6 +208,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		break;
 		case STATE_MAINMENU: if (menu != null) menu.readInput(e.getKeyCode(), false);
 		break;
+		case STATE_GAMEOVERSCREEN: if (gameOverScreen != null) gameOverScreen.readInput(e.getKeyCode(), false);
+		break;
 		}
 	}
 
@@ -215,7 +222,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		
 		gameState = null;
 		menu = null;
-		//gameOverScreen = null;
+		gameOverScreen = null;
 		//victoryScreen = null;
 		
 		switch (targetState) {
@@ -226,10 +233,10 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		case STATE_MAINMENU: state = STATE_MAINMENU; menu = new MainMenu();
 			break;
 			
-		//do nothing for now
-		case STATE_GAMEOVERSCREEN:
+		case STATE_GAMEOVERSCREEN: state = STATE_GAMEOVERSCREEN; gameOverScreen = new GameOver();
 			break;
 			
+			//do nothing for now
 		case STATE_VICTORYSCREEN:
 			break;
 		

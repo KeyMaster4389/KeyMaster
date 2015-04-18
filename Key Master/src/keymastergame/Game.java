@@ -187,28 +187,20 @@ public class Game {
 					playerLives--;
 					
 					//message to player about lives remaining
-					JOptionPane.showMessageDialog(null,
-							"You have died.\nREMAINING LIVES: " + playerLives,
-							"REMAINING LIVES: " + playerLives, 2, keyIcon);
-
-					System.out.println("REMAINING LIVES: " + playerLives);
+//					JOptionPane.showMessageDialog(null,
+//							"You have died.\nREMAINING LIVES: " + playerLives,
+//							"REMAINING LIVES: " + playerLives, 2, keyIcon);
+//
+//					System.out.println("REMAINING LIVES: " + playerLives);
 
 					if (playerLives == 0) {
 						// game over
 						// just do this for now
 						System.out.println("GAME OVER :(");
+						
 						Sound.GAMEOVER.play();
+						StartingClass.changeState(StartingClass.STATE_GAMEOVERSCREEN);
 
-						int result = JOptionPane.showConfirmDialog(null,
-										"         \t         Oh no!!\nYou have been defeated by\n     \t  the evil Key Master!!\nWould you like to play again?",
-										"Game Over", JOptionPane.YES_NO_OPTION,
-										2, keyIcon);
-
-						if (result == JOptionPane.YES_OPTION) {
-							currentLevel = 1;
-							playerLives = 3;
-						} else
-							StartingClass.changeState(StartingClass.STATE_MAINMENU);
 					}
 					loadLevel();
 
