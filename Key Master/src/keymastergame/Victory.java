@@ -6,14 +6,13 @@ import java.awt.event.KeyEvent;
 import keymastergame.framework.Resource;
 import keymastergame.framework.Sound;
 
-public class GameOver {
-	// Game over screen.
+public class Victory {
 
 	private boolean keySelect = false;
 
 	public final static int controlSelect = KeyEvent.VK_SPACE;
 
-	public GameOver() {
+	public Victory() {
 
 	}
 
@@ -31,9 +30,10 @@ public class GameOver {
 	public void paint(Graphics g) {
 
 		g.drawImage(Resource.blackBackground, 0, 0, null);
-		g.drawImage(Resource.menuKey, 320, 25, null);
-		g.drawImage(Resource.gameOver, 165, 215, null);
-		g.drawImage(Resource.tryAgain, 350, 400, null);
+		g.drawImage(Resource.menuKey, 335, 15, null);
+		g.drawImage(Resource.congrats, 165, 220, null);
+		g.drawImage(Resource.victory1, 300, 365, null);
+		g.drawImage(Resource.victory2, 300, 430, null);
 		g.drawImage(Resource.credits, 460, 590, null);
 
 	}

@@ -7,18 +7,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Resource {
-	
+
 	public static Image background;
 
 	public static Image tileSpr;
 	public static Image ladderSpr;
-	
+
 	public static Image doorOpenSpr;
 	public static Image doorClosedSpr;
-	
+
 	public static Image keySpr;
-	
-	//player sprites
+
+	// player sprites
 	public static Image idle;
 	public static Image air;
 	public static Image climb1;
@@ -39,34 +39,38 @@ public class Resource {
 	public static Image die8;
 	public static Image die9;
 	public static Image winning;
-	
-	//menus and screens
+
+	// menus and screens
 	public static Image mainMenuScreen;
 	public static Image menuSelector;
 	public static Image menuNewGame;
 	public static Image menuNewGame_Highlight;
 	public static Image menuQuit;
 	public static Image menuQuit_Highlight;
-	
+
 	public static Image menuKey;
-	
-	//game over screen
+
+	// game over screen
 	public static Image blackBackground;
 	public static Image gameOver;
 	public static Image tryAgain;
 	public static Image credits;
-	
-	//hud stuff	
+
+	// victory screen
+	public static Image victory1;
+	public static Image victory2;
+	public static Image congrats;
+
+	// hud stuff
 	public static Image number[];
 	public static Image time;
 	public static Image lives;
 	public static Image level;
-	
-	
+
 	public static boolean loadResources() {
 		try {
 
-			//player
+			// player
 			idle = ImageIO.read(new File("data/player/idle.png"));
 			air = ImageIO.read(new File("data/player/air.png"));
 			climb1 = ImageIO.read(new File("data/player/climb1.png"));
@@ -87,35 +91,43 @@ public class Resource {
 			die8 = ImageIO.read(new File("data/player/die8.png"));
 			die9 = ImageIO.read(new File("data/player/die9.png"));
 			winning = ImageIO.read(new File("data/player/winning.png"));
-			
-			//everything else
+
+			// everything else
 			background = ImageIO.read(new File("data/background.jpg"));
-			
+
 			tileSpr = ImageIO.read(new File("data/tile.bmp"));
 			ladderSpr = ImageIO.read(new File("data/Ladder.png"));
-			
+
 			doorOpenSpr = ImageIO.read(new File("data/door_open.png"));
 			doorClosedSpr = ImageIO.read(new File("data/door_closed.png"));
-			
+
 			keySpr = ImageIO.read(new File("data/key.png"));
 
-			//menus and screens
+			// menus and screens
 			mainMenuScreen = ImageIO.read(new File("data/menu/mainmenu.bmp"));
-			menuSelector = ImageIO.read(new File("data/menu/selector.png")); 
-			menuQuit = ImageIO.read(new File("data/menu/quit.png")); 
-			menuQuit_Highlight = ImageIO.read(new File("data/menu/quit_highlight.png")); 
-			menuNewGame = ImageIO.read(new File("data/menu/startnew.png")); 
-			menuNewGame_Highlight = ImageIO.read(new File("data/menu/startnew_highlight.png"));
-			
+			menuSelector = ImageIO.read(new File("data/menu/selector.png"));
+			menuQuit = ImageIO.read(new File("data/menu/quit.png"));
+			menuQuit_Highlight = ImageIO.read(new File(
+					"data/menu/quit_highlight.png"));
+			menuNewGame = ImageIO.read(new File("data/menu/startnew.png"));
+			menuNewGame_Highlight = ImageIO.read(new File(
+					"data/menu/startnew_highlight.png"));
+
 			menuKey = ImageIO.read(new File("data/menu/keymenu2.png"));
-			
-			//game over screen
-			blackBackground = ImageIO.read(new File("data/menu/blackbackground.png"));
+
+			// game over screen
+			blackBackground = ImageIO.read(new File(
+					"data/menu/blackbackground.png"));
 			gameOver = ImageIO.read(new File("data/menu/gameover.png"));
 			tryAgain = ImageIO.read(new File("data/menu/tryagain.png"));
 			credits = ImageIO.read(new File("data/menu/credits5.png"));
-			
-			//hud stuff
+
+			// victory screen
+			congrats = ImageIO.read(new File("data/menu/congrats.png"));
+			victory1 = ImageIO.read(new File("data/menu/victory1.png"));
+			victory2 = ImageIO.read(new File("data/menu/victory2.png"));
+
+			// hud stuff
 			number = new Image[10];
 			number[0] = ImageIO.read(new File("data/0.png"));
 			number[1] = ImageIO.read(new File("data/1.png"));
@@ -128,16 +140,16 @@ public class Resource {
 			number[8] = ImageIO.read(new File("data/8.png"));
 			number[9] = ImageIO.read(new File("data/9.png"));
 			time = ImageIO.read(new File("data/time.png"));
-			
+
 			lives = ImageIO.read(new File("data/lives.png"));
 			level = ImageIO.read(new File("data/level.png"));
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 }

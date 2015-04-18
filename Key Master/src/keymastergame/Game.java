@@ -45,11 +45,11 @@ public class Game {
 
 	public Game() {
 		objects = new ArrayList<GameObject>();
-		removeObj = new ArrayList<GameObject>(); 
+		removeObj = new ArrayList<GameObject>();
 		addObj = new ArrayList<GameObject>();
-		
+
 		gameClock = new Clock();
-		
+
 		lvl = new Level();
 		plr = new Player();
 		key = new Key();
@@ -62,7 +62,6 @@ public class Game {
 
 		loadLevel();
 
-		
 		try {
 			keyImage = ImageIO.read(getClass().getResource("/data/key.png"));
 
@@ -73,34 +72,34 @@ public class Game {
 	}
 
 	public void update() {
-		
-		
+
 		if (!plr.hasWon && !plr.isDead) {
 			lvl.update();
 			gameClock.update();
 			plr.update();
 			if (plr.collisionActive())
 				doCollision(plr);
-						
+
 			removeObj.clear();
-			
+
 			for (GameObject e : objects) {
 				e.update();
 				if (e.collisionActive())
 					doCollision(e);
-				
-				if (e instanceof EnemyObject && plr.collision.intersects(e.collision)) {
+
+				if (e instanceof EnemyObject
+						&& plr.collision.intersects(e.collision)) {
 					plr.die();
 					if (e instanceof Projectile) {
 						e.toRemove = true;
 					}
 				}
-				
+
 				if (!e.collision.intersects(StartingClass.levelBoundary)) {
 					System.out.println("object destroyed!");
 					e.toRemove = true;
 				}
-				
+
 				if (e.toRemove) {
 					removeObj.add(e);
 				}
@@ -118,14 +117,13 @@ public class Game {
 
 			objects.addAll(addObj);
 			addObj.clear();
-			
 
 			door.update();
 			key.update();
 
 			if (plr.collision.intersects(key.collision)) {
 				key.setFollow(plr);
-				
+
 			}
 
 			plr.updateAnimation();
@@ -166,18 +164,23 @@ public class Game {
 						// you win!
 						// just do this for now
 						System.out.println("YOU'RE WINNER");
-						
-						//win message and ask to play again
-						int result = JOptionPane.showConfirmDialog(null,
-										"      \t      \t     Congratulations!!\nYou have defeated the evil Key Master!!\n     \t    \tWould you like to play again?",
-										"Congratulations! You win!",
-										JOptionPane.YES_NO_OPTION, 2, keyIcon);
-						
 
-						if (result == JOptionPane.YES_OPTION)
-							currentLevel = 1;
-						else
-							StartingClass.changeState(StartingClass.STATE_MAINMENU);
+						StartingClass
+						.changeState(StartingClass.STATE_VICTORYSCREEN);
+						
+						// win message and ask to play again
+//						int result = JOptionPane
+//								.showConfirmDialog(
+//										null,
+//										"      \t      \t     Congratulations!!\nYou have defeated the evil Key Master!!\n     \t    \tWould you like to play again?",
+//										"Congratulations! You win!",
+//										JOptionPane.YES_NO_OPTION, 2, keyIcon);
+//
+//						if (result == JOptionPane.YES_OPTION)
+//							currentLevel = 1;
+//						else
+//							StartingClass
+//									.changeState(StartingClass.STATE_MAINMENU);
 					}
 					loadLevel();
 
@@ -185,21 +188,22 @@ public class Game {
 					System.out.println("YOU DIED");
 
 					playerLives--;
-					
-					//message to player about lives remaining
-//					JOptionPane.showMessageDialog(null,
-//							"You have died.\nREMAINING LIVES: " + playerLives,
-//							"REMAINING LIVES: " + playerLives, 2, keyIcon);
-//
-//					System.out.println("REMAINING LIVES: " + playerLives);
+
+					// message to player about lives remaining
+					// JOptionPane.showMessageDialog(null,
+					// "You have died.\nREMAINING LIVES: " + playerLives,
+					// "REMAINING LIVES: " + playerLives, 2, keyIcon);
+					//
+					// System.out.println("REMAINING LIVES: " + playerLives);
 
 					if (playerLives == 0) {
 						// game over
 						// just do this for now
 						System.out.println("GAME OVER :(");
-						
+
 						Sound.GAMEOVER.play();
-						StartingClass.changeState(StartingClass.STATE_GAMEOVERSCREEN);
+						StartingClass
+								.changeState(StartingClass.STATE_GAMEOVERSCREEN);
 
 					}
 					loadLevel();
@@ -211,7 +215,7 @@ public class Game {
 	}
 
 	public void paint(Graphics g) {
-		
+
 		lvl.paint(g);
 
 		door.paint(g);
@@ -224,21 +228,23 @@ public class Game {
 		plr.paint(g);
 
 		key.paint(g);
-		
-		//paint HUD
+
+		// paint HUD
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, StartingClass.WINDOWWIDTH , 32);
-		//paint clock images
+		g.fillRect(0, 0, StartingClass.WINDOWWIDTH, 32);
+		// paint clock images
 		gameClock.paint(g);
-		
-		//paint level number
-		g.drawImage(Resource.level, StartingClass.WINDOWWIDTH/2 - 60, 0, null);
-		g.drawImage(Resource.number[currentLevel], StartingClass.WINDOWWIDTH/2 + 30, 3, null);
-		
-		
-		//paint life count
-		if (playerLives < 0) playerLives = 0;
-		else if (playerLives > 9) playerLives = 9;
+
+		// paint level number
+		g.drawImage(Resource.level, StartingClass.WINDOWWIDTH / 2 - 60, 0, null);
+		g.drawImage(Resource.number[currentLevel],
+				StartingClass.WINDOWWIDTH / 2 + 30, 3, null);
+
+		// paint life count
+		if (playerLives < 0)
+			playerLives = 0;
+		else if (playerLives > 9)
+			playerLives = 9;
 
 		g.drawImage(Resource.lives, 16, 0, null);
 		g.drawImage(Resource.number[playerLives], 96, 3, null);
@@ -287,11 +293,17 @@ public class Game {
 	}
 
 	public boolean loadLevel() {
-		String path = "data/level1.txt";
-		if (currentLevel == 2) {
+		String path = null;
+		
+		if(currentLevel == 1){
+			path = "data/level1.txt";
+			gameClock = new Clock(30);
+		} else if (currentLevel == 2) {
 			path = "data/level2.txt";
+			gameClock = new Clock(40);
 		} else if (currentLevel == 3) {
 			path = "data/level3.txt";
+			gameClock = new Clock();
 		}
 
 		lvl.clear();
@@ -300,7 +312,7 @@ public class Game {
 		plr = new Player();
 		key = new Key();
 		door = new Door();
-		gameClock = new Clock();
+		//gameClock = new Clock();
 		levelComplete = false;
 
 		try {
@@ -328,13 +340,12 @@ public class Game {
 		}
 
 		lvl.generateLevelCollision();
-		
+
 		Sound.MUSIC.loop();
 
 		return true;
 	}
 
-	
 	private void addToGame(char c, Vector pos) {
 
 		// convert grid position to actual position in pixels
@@ -371,7 +382,7 @@ public class Game {
 			key = new Key(realPos);
 			break; // set key position
 
-		case 'A': 
+		case 'A':
 			objects.add(new EnemyA(realPos));
 			break; // add enemy type A
 
@@ -382,12 +393,12 @@ public class Game {
 		case 'C':
 			objects.add(new EnemyC(realPos));
 			break; // add enemy type C
-			
+
 		case 'G':
 			objects.add(new GameObject(realPos));
 			break; // add basic object
 		case 'E':
-			//objects.add(new EnemyObject(realPos));
+			// objects.add(new EnemyObject(realPos));
 			break; // add basic object
 		}
 	}

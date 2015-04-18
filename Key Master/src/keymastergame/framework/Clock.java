@@ -9,7 +9,7 @@ import keymastergame.StartingClass;
 
 public class Clock {
 	
-	private int Duration = 60; // Time for doing the level in seconds.
+	private int Duration; // Time for doing the level in seconds.
 	 
 	private int previous = -1;
 	private int sec;
@@ -20,6 +20,14 @@ public class Clock {
 	public Image timeImage0, timeImage1, timeImage2;
 		
 	String  totalSecondsChar;
+	
+	public Clock(){
+		Duration = 60;
+	}
+	
+	public Clock(int levelTime){
+		Duration = levelTime;
+	}
 	
 	public void update() {
 			
@@ -93,6 +101,10 @@ public class Clock {
 	public Image getTimeImage2() {
         return timeImage2;
     }
+	
+	public void setDuration(int levelTime){
+		Duration = levelTime;
+	}
 	
 	public void paint(Graphics g) {
 		Vector offset = new Vector(5,3);
