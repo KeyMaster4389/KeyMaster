@@ -86,6 +86,9 @@ public class Game {
 				e.update();
 				if (e.collisionActive())
 					doCollision(e);
+				
+				if(e instanceof EnemyC)
+					((EnemyC) e).updateAnimation();
 
 				if (e instanceof EnemyObject
 						&& plr.collision.intersects(e.collision)) {
@@ -127,6 +130,7 @@ public class Game {
 			}
 
 			plr.updateAnimation();
+			
 
 			if (gameClock.getTime()) {
 				plr.die();
@@ -167,6 +171,8 @@ public class Game {
 
 						StartingClass
 						.changeState(StartingClass.STATE_VICTORYSCREEN);
+						Sound.VICTORY.play();
+						currentLevel = 1;
 						
 						// win message and ask to play again
 //						int result = JOptionPane

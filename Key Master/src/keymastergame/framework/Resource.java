@@ -39,6 +39,17 @@ public class Resource {
 	public static Image die8;
 	public static Image die9;
 	public static Image winning;
+	
+	//Enemy C
+	public static Image enemyCLeft1;
+	public static Image enemyCLeft2;
+	public static Image enemyCLeft3;
+	public static Image enemyCLeft4;
+	public static Image enemyCRight1;
+	public static Image enemyCRight2;
+	public static Image enemyCRight3;
+	public static Image enemyCRight4;
+	
 
 	// menus and screens
 	public static Image mainMenuScreen;
@@ -91,6 +102,16 @@ public class Resource {
 			die8 = ImageIO.read(new File("data/player/die8.png"));
 			die9 = ImageIO.read(new File("data/player/die9.png"));
 			winning = ImageIO.read(new File("data/player/winning.png"));
+			
+			//Enemy A
+			enemyCLeft1 = ImageIO.read(new File("data/enemies/e2l1.png"));
+			enemyCLeft2 = ImageIO.read(new File("data/enemies/e2l2.png"));
+			enemyCLeft3 = ImageIO.read(new File("data/enemies/e2l3.png"));
+			enemyCLeft4 = ImageIO.read(new File("data/enemies/e2l4.png"));
+			enemyCRight1 = ImageIO.read(new File("data/enemies/e2r1.png"));
+			enemyCRight2 = ImageIO.read(new File("data/enemies/e2r2.png"));
+			enemyCRight3 = ImageIO.read(new File("data/enemies/e2r3.png"));
+			enemyCRight4 = ImageIO.read(new File("data/enemies/e2r4.png"));
 
 			// everything else
 			background = ImageIO.read(new File("data/background.jpg"));

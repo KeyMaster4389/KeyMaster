@@ -12,4 +12,5 @@ public class Sound {
 	public static AudioClip TILE_REAPPEAR;
 	public static AudioClip MENU;
 	public static AudioClip MUSIC;
+	public static AudioClip VICTORY;
 }

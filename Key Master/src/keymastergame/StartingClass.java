@@ -74,6 +74,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 					+ "/data/sounds/music.wav"));
 			Sound.MENU = Applet.newAudioClip(new URL(getCodeBase()
 					+ "/data/sounds/menu.wav"));
+			Sound.VICTORY = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/victory1.wav"));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -138,7 +140,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 					gameOverScreen.update();
 				break;
 			case STATE_VICTORYSCREEN:
-				if(victoryScreen != null)
+				if (victoryScreen != null)
 					victoryScreen.update();
 				break;
 
@@ -197,7 +199,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				gameOverScreen.paint(g);
 			break;
 		case STATE_VICTORYSCREEN:
-			if(victoryScreen != null)
+			if (victoryScreen != null)
 				victoryScreen.paint(g);
 			break;
 
@@ -221,7 +223,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				gameOverScreen.readInput(e.getKeyCode(), true);
 			break;
 		case STATE_VICTORYSCREEN:
-			if(victoryScreen != null)
+			if (victoryScreen != null)
 				victoryScreen.readInput(e.getKeyCode(), true);
 			break;
 
@@ -279,7 +281,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			state = STATE_GAMEOVERSCREEN;
 			gameOverScreen = new GameOver();
 			break;
-			
+
 		case STATE_VICTORYSCREEN:
 			state = STATE_VICTORYSCREEN;
 			victoryScreen = new Victory();
