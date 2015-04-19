@@ -26,7 +26,7 @@ public class EnemyA extends EnemyObject {
 
 	private Animation left;
 	private Animation right;
-	private static Image currentImage;
+	private Image currentImage;
 	
 	public EnemyA() {
 		collision = new Box(new Vector(0,0), size);
@@ -78,30 +78,13 @@ public class EnemyA extends EnemyObject {
 			
 		}else if (velocity.x > 0){
 			
-			faceLeft = false;
-			//facePlayer();
-			
-			if(faceState != 1){
 				
-				faceState = 1;
-				right.resetAnimation();
-				
-			}
-			
 			currentImage = right.getImage();
 			right.update(StartingClass.frameSpeed);
 			
 		}else if (velocity.x < 0){
 			
-			faceLeft = true;
-			//facePlayer();
 			
-			if(faceState != 0){
-				
-				faceState = 0;
-				left.resetAnimation();
-				
-			}
 			
 			currentImage = left.getImage();
 			left.update(StartingClass.frameSpeed);

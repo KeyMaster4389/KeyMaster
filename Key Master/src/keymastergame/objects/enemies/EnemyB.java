@@ -35,7 +35,7 @@ public class EnemyB extends EnemyObject {
 
 	private Animation left;
 	private Animation right;
-	private static Image currentImage;
+	private Image currentImage;
 
 	public EnemyB() {
 		collision = new Box(new Vector(0, 0), size);
