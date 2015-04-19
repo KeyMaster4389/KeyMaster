@@ -54,7 +54,7 @@ public class Door extends GameObject{
 				g.drawImage(Resource.doorClosedSpr, xPos, yPos, null);
 			}
 			
-		} else {
+		}else {
 			if (StartingClass.debugGraphics) {
 				collision.paint(g, Color.BLACK);
 			} else {

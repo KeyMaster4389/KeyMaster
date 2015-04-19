@@ -19,18 +19,17 @@ import keymastergame.framework.Vector;
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	public static final boolean debugGraphics = false;
-	
+
 	public static final int STATE_GAMEPLAY = 0;
 	public static final int STATE_MAINMENU = 1;
 	public static final int STATE_SCREEN_WIN = 2;
 	public static final int STATE_SCREEN_LOSE = 3;
 
 	public static int state;
-	
+
 	public static int frameSpeed = 17;
-	
-	
-	//states;
+
+	// states;
 	public static Game gameState;
 	public static MainMenu menu;
 	public static Screen currentScreen;
@@ -41,66 +40,71 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		
 	public static final int WINDOWWIDTH = 960;
 	public static final int WINDOWHEIGHT = 640;
-	
+
 	public static final int LEVELWIDTH = 30;
 	public static final int LEVELHEIGHT = 20;
-	
+
 	public static final int TILESIZE = 32;
-	
-	public static final Box levelBoundary = new Box(new Vector(StartingClass.WINDOWWIDTH/2, StartingClass.WINDOWHEIGHT/2),
+
+	public static final Box levelBoundary = new Box(new Vector(
+			StartingClass.WINDOWWIDTH / 2, StartingClass.WINDOWHEIGHT / 2),
 			new Vector(StartingClass.WINDOWWIDTH, StartingClass.WINDOWHEIGHT));
 
 	@Override
 	public void init() {
-		
+
 		Resource.loadResources();
-		
-		//initial sounds
+
+		// initial sounds
 		try {
-			Sound.DIE = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/die.wav"));
-			Sound.WIN = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/win.wav"));
-			Sound.MENU = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/menu.wav"));
-			Sound.TILE_REMOVE = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/tile_remove.wav"));
-			Sound.TILE_REAPPEAR = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/tile_reappear.wav"));
-			Sound.GAMEOVER = Applet.newAudioClip(new URL(getCodeBase() + "/data/sounds/gameover.wav"));
+			Sound.DIE = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/die.wav"));
+			Sound.WIN = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/win.wav"));
+			Sound.TILE_REMOVE = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/tile_remove.wav"));
+			Sound.TILE_REAPPEAR = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/tile_reappear.wav"));
+			Sound.GAMEOVER = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/gameover.wav"));
+			Sound.MUSIC = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/music.wav"));
+			Sound.MENU = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/menu.wav"));
+			Sound.VICTORY = Applet.newAudioClip(new URL(getCodeBase()
+					+ "/data/sounds/victory1.wav"));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		Sound.setUpMusic(getCodeBase() + "/data/sounds/music.wav");
-		
-		
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
 		setBackground(Color.WHITE);
 		setFocusable(true);
 		addKeyListener(this);
 		Frame frame = (Frame) this.getParent().getParent();
 		frame.setTitle("Key Master");
-				
+		
 		changeState(STATE_MAINMENU);
 
 		Thread thread = new Thread(this);
 		thread.start();
-		
 
 	}// end of init method
 
 	@Override
 	public void start() {
 
-
 	}// end of start method
 
 	@Override
 	public void stop() {
-		
+
 	}
 
 	@Override
 	public void destroy() {
 
-		Sound.closeMusic();
 	}
 
 	@Override
@@ -108,22 +112,21 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 		// game loop
 		while (true) {
-			// here we'll call the update methods of the game
-			// objects as well as the animate method.
-			
 			switch (state) {
-				case STATE_GAMEPLAY: if (gameState != null) gameState.update();
+			case STATE_GAMEPLAY:
+				if (gameState != null)
+					gameState.update();
 				break;
-				case STATE_MAINMENU: if (menu != null) menu.update();
+			case STATE_MAINMENU:
+				if (menu != null)
+					menu.update();
 				break;
-				case STATE_SCREEN_WIN:
-				case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.update();
+			case STATE_SCREEN_WIN:
+			case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.update();
 				break;
 			}
-			
+
 			repaint();
-			
-			
 			try {
 				Thread.sleep(frameSpeed);
 			} catch (InterruptedException e) {
@@ -158,9 +161,13 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		// various game objects
 
 		switch (state) {
-			case STATE_GAMEPLAY: if (gameState != null) gameState.paint(g);
+		case STATE_GAMEPLAY:
+			if (gameState != null)
+				gameState.paint(g);
 			break;
-			case STATE_MAINMENU: if (menu != null) menu.paint(g);
+		case STATE_MAINMENU:
+			if (menu != null)
+				menu.paint(g);
 			break;
 			case STATE_SCREEN_WIN:
 			case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.paint(g);
@@ -173,20 +180,23 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
 
 		switch (state) {
-			case STATE_GAMEPLAY: if (gameState != null) gameState.readInput(e.getKeyCode(), true);
+		case STATE_GAMEPLAY:
+			if (gameState != null)
+				gameState.readInput(e.getKeyCode(), true);
 			break;
-			case STATE_MAINMENU: if (menu != null) menu.readInput(e.getKeyCode(), true);
+		case STATE_MAINMENU:
+			if (menu != null)
+				menu.readInput(e.getKeyCode(), true);
 			break;
-			case STATE_SCREEN_WIN:
-			case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.readInput(e.getKeyCode(), true);
+		case STATE_SCREEN_WIN:
+		case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.readInput(e.getKeyCode(), true);
 			break;
 		
 		
 		}
-		
+
 	}
 
 	@Override
@@ -208,25 +218,28 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	}
 
 	public static void changeState(int targetState) {
-		
+
 		gameState = null;
 		menu = null;
 		currentScreen = null;
 		
 		switch (targetState) {
-		
-		case STATE_GAMEPLAY: state = STATE_GAMEPLAY; gameState = new Game();
+
+		case STATE_GAMEPLAY:
+			state = STATE_GAMEPLAY;
+			gameState = new Game();
 			break;
 
-		case STATE_MAINMENU: state = STATE_MAINMENU; menu = new MainMenu();
+		case STATE_MAINMENU:
+			state = STATE_MAINMENU;
+			menu = new MainMenu();
 			break;
-			
 		case STATE_SCREEN_WIN: state = STATE_SCREEN_WIN; currentScreen = new Screen(Screen.YOU_WIN, STATE_MAINMENU);
 			break;
 			
 		case STATE_SCREEN_LOSE: state = STATE_SCREEN_LOSE; currentScreen = new Screen(Screen.YOU_LOSE, STATE_MAINMENU);
 			break;
 		}
-		
+
 	}
 }

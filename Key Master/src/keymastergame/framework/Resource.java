@@ -7,18 +7,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Resource {
-	
+
 	public static Image background;
 
 	public static Image tileSpr;
 	public static Image ladderSpr;
-	
+
 	public static Image doorOpenSpr;
 	public static Image doorClosedSpr;
-	
+
 	public static Image keySpr;
-	
-	//player sprites
+
+	// player sprites
 	public static Image idle;
 	public static Image air;
 	public static Image climb1;
@@ -40,30 +40,66 @@ public class Resource {
 	public static Image die9;
 	public static Image winning;
 	
-	//menus and screens
+	//Enemy A
+	public static Image enemyALeft1;
+	public static Image enemyALeft2;
+	public static Image enemyALeft3;
+	public static Image enemyALeft4;
+	public static Image enemyALeft5;
+	public static Image enemyALeft6;
+	public static Image enemyALeft7;
+	public static Image enemyARight1;
+	public static Image enemyARight2;
+	public static Image enemyARight3;
+	public static Image enemyARight4;
+	public static Image enemyARight5;
+	public static Image enemyARight6;
+	public static Image enemyARight7;
+	
+	//Enemy B
+	public static Image enemyBLeft1;
+	public static Image enemyBLeft2;
+	public static Image enemyBLeft3;
+	public static Image enemyBLeft4;
+	public static Image enemyBRight1;
+	public static Image enemyBRight2;
+	public static Image enemyBRight3;
+	public static Image enemyBRight4;
+	
+	//Enemy C
+	public static Image enemyCLeft1;
+	public static Image enemyCLeft2;
+	public static Image enemyCLeft3;
+	public static Image enemyCLeft4;
+	public static Image enemyCRight1;
+	public static Image enemyCRight2;
+	public static Image enemyCRight3;
+	public static Image enemyCRight4;
+	
+
+	// menus and screens
 	public static Image mainMenuScreen;
 	public static Image menuSelector;
 	public static Image menuNewGame;
 	public static Image menuNewGame_Highlight;
 	public static Image menuQuit;
 	public static Image menuQuit_Highlight;
+	public static Image menuKey;
 	
 	public static Image screenPressSpace;
 	public static Image screenWin;
 	public static Image screenLose;
 	
-	
-	//hud stuff	
+	// hud stuff
 	public static Image number[];
 	public static Image time;
 	public static Image lives;
 	public static Image level;
-	
-	
+
 	public static boolean loadResources() {
 		try {
 
-			//player
+			// player
 			idle = ImageIO.read(new File("data/player/idle.png"));
 			air = ImageIO.read(new File("data/player/air.png"));
 			climb1 = ImageIO.read(new File("data/player/climb1.png"));
@@ -85,24 +121,62 @@ public class Resource {
 			die9 = ImageIO.read(new File("data/player/die9.png"));
 			winning = ImageIO.read(new File("data/player/winning.png"));
 			
-			//everything else
-			background = ImageIO.read(new File("data/background.jpg"));
+			//Enemy A
+			enemyALeft1 = ImageIO.read(new File("data/enemies/el1.png"));
+			enemyALeft2 = ImageIO.read(new File("data/enemies/el2.png"));
+			enemyALeft3 = ImageIO.read(new File("data/enemies/el3.png"));
+			enemyALeft4 = ImageIO.read(new File("data/enemies/el4.png"));
+			enemyALeft5 = ImageIO.read(new File("data/enemies/el5.png"));
+			enemyALeft6 = ImageIO.read(new File("data/enemies/el6.png"));
+			enemyALeft7 = ImageIO.read(new File("data/enemies/el7.png"));
+			enemyARight1 = ImageIO.read(new File("data/enemies/er1.png"));
+			enemyARight2 = ImageIO.read(new File("data/enemies/er2.png"));
+			enemyARight3 = ImageIO.read(new File("data/enemies/er3.png"));
+			enemyARight4 = ImageIO.read(new File("data/enemies/er4.png"));
+			enemyARight5 = ImageIO.read(new File("data/enemies/er5.png"));
+			enemyARight6 = ImageIO.read(new File("data/enemies/er6.png"));
+			enemyARight7 = ImageIO.read(new File("data/enemies/er7.png"));
 			
+			//Enemy B
+			enemyBLeft1 = ImageIO.read(new File("data/enemies/e3l1.png"));
+			enemyBLeft2 = ImageIO.read(new File("data/enemies/e3l2.png"));
+			enemyBLeft3 = ImageIO.read(new File("data/enemies/e3l3.png"));
+			enemyBLeft4 = ImageIO.read(new File("data/enemies/e4l4.png"));
+			enemyBRight1 = ImageIO.read(new File("data/enemies/e3r1.png"));
+			enemyBRight2 = ImageIO.read(new File("data/enemies/e3r2.png"));
+			enemyBRight3 = ImageIO.read(new File("data/enemies/e3r3.png"));
+			enemyBRight4 = ImageIO.read(new File("data/enemies/e4r4.png"));
+			
+			//Enemy C
+			enemyCLeft1 = ImageIO.read(new File("data/enemies/e2l1.png"));
+			enemyCLeft2 = ImageIO.read(new File("data/enemies/e2l2.png"));
+			enemyCLeft3 = ImageIO.read(new File("data/enemies/e2l3.png"));
+			enemyCLeft4 = ImageIO.read(new File("data/enemies/e2l4.png"));
+			enemyCRight1 = ImageIO.read(new File("data/enemies/e2r1.png"));
+			enemyCRight2 = ImageIO.read(new File("data/enemies/e2r2.png"));
+			enemyCRight3 = ImageIO.read(new File("data/enemies/e2r3.png"));
+			enemyCRight4 = ImageIO.read(new File("data/enemies/e2r4.png"));
+
+			// everything else
+			background = ImageIO.read(new File("data/background.jpg"));
+
 			tileSpr = ImageIO.read(new File("data/tile.bmp"));
 			ladderSpr = ImageIO.read(new File("data/Ladder.png"));
-			
+
 			doorOpenSpr = ImageIO.read(new File("data/door_open.png"));
 			doorClosedSpr = ImageIO.read(new File("data/door_closed.png"));
-			
+
 			keySpr = ImageIO.read(new File("data/key.png"));
 
-			//menus and screens
+			// menus and screens
 			mainMenuScreen = ImageIO.read(new File("data/menu/mainmenu.bmp"));
+
 			menuSelector = ImageIO.read(new File("data/menu/selector.png")); 
 			menuQuit = ImageIO.read(new File("data/menu/quit.png")); 
 			menuQuit_Highlight = ImageIO.read(new File("data/menu/quit_highlight.png")); 
 			menuNewGame = ImageIO.read(new File("data/menu/startnew.png")); 
 			menuNewGame_Highlight = ImageIO.read(new File("data/menu/startnew_highlight.png")); 
+			menuKey = ImageIO.read(new File("data/menu/keymenu2.png"));
 			
 			screenPressSpace = ImageIO.read(new File("data/PressSpace.png")); 
 			screenWin = ImageIO.read(new File("data/screen_youwin.bmp")); 
@@ -121,16 +195,16 @@ public class Resource {
 			number[8] = ImageIO.read(new File("data/8.png"));
 			number[9] = ImageIO.read(new File("data/9.png"));
 			time = ImageIO.read(new File("data/time.png"));
-			
+
 			lives = ImageIO.read(new File("data/lives.png"));
 			level = ImageIO.read(new File("data/level.png"));
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 }
