@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
-import javax.sound.sampled.Clip;
+import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -89,14 +89,14 @@ public class Game {
 				e.update();
 				if (e.collisionActive())
 					doCollision(e);
-				
-				if(e instanceof EnemyA)
+
+				if (e instanceof EnemyA)
 					((EnemyA) e).updateAnimation();
-				else if(e instanceof EnemyB)
+				else if (e instanceof EnemyB)
 					((EnemyB) e).updateAnimation();
-				else if(e instanceof EnemyC)
+				else if (e instanceof EnemyC)
 					((EnemyC) e).updateAnimation();
-				
+
 				if (e instanceof EnemyObject
 						&& plr.collision.intersects(e.collision)) {
 					plr.die();
@@ -137,7 +137,6 @@ public class Game {
 			}
 
 			plr.updateAnimation();
-			
 
 			if (gameClock.getTime()) {
 				plr.die();
@@ -180,12 +179,10 @@ public class Game {
 
 				} else if (plr.isDead) {
 					playerLives--;
-					
 					if (playerLives == 0) {
 						// game over
 						StartingClass.changeState(StartingClass.STATE_SCREEN_LOSE);
 						return;
-						
 					}
 					loadLevel();
 
@@ -274,8 +271,8 @@ public class Game {
 
 	public boolean loadLevel() {
 		String path = null;
-		
-		if(currentLevel == 1){
+
+		if (currentLevel == 1) {
 			path = "data/level1.txt";
 			gameClock = new Clock(30);
 		} else if (currentLevel == 2) {
@@ -292,7 +289,6 @@ public class Game {
 		plr = new Player();
 		key = new Key();
 		door = new Door();
-		//gameClock = new Clock();
 		levelComplete = false;
 
 		try {

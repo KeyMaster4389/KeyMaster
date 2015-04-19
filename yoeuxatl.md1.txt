@@ -1,0 +1,40 @@
+﻿Merge branch 'master' of https://github.com/KeyMaster4389/KeyMaster
+
+Conflicts:
+	Key Master/src/data/sounds/music.wav
+	Key Master/src/keymastergame/Game.java
+	Key Master/src/keymastergame/StartingClass.java
+	Key Master/src/keymastergame/framework/Sound.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 6 and 1 different commit each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	deleted:    Key Master/src/data/sounds/die3.wav
+#	deleted:    Key Master/src/data/sounds/music2.wav
+#	new file:   Key Master/src/data/sounds/music3.wav
+#	new file:   Key Master/src/data/sounds/music4.wav
+#	new file:   Key Master/src/data/sounds/music5.wav
+#	new file:   Key Master/src/data/sounds/music6.wav
+#	modified:   Key Master/src/keymastergame/Game.java
+#	modified:   Key Master/src/keymastergame/Level.java
+#	modified:   Key Master/src/keymastergame/StartingClass.java
+#	modified:   Key Master/src/keymastergame/framework/Sound.java
+#	modified:   bin/keymastergame/Game.class
+#	modified:   bin/keymastergame/Level.class
+#	modified:   bin/keymastergame/StartingClass.class
+#	modified:   bin/keymastergame/framework/Sound.class
+#
+

@@ -37,7 +37,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	// Image variables for double buffering
 	private Image image;
 	private Graphics second;
-		
+
 	public static final int WINDOWWIDTH = 960;
 	public static final int WINDOWHEIGHT = 640;
 
@@ -74,8 +74,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		Sound.setUpMusic(getCodeBase() + "/data/sounds/music.wav");
+		}		
+		Sound.setUpMusic(getCodeBase() + "/data/sounds/music4.wav");
 
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
 		setBackground(Color.WHITE);
@@ -83,7 +83,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		addKeyListener(this);
 		Frame frame = (Frame) this.getParent().getParent();
 		frame.setTitle("Key Master");
-		
 		changeState(STATE_MAINMENU);
 
 		Thread thread = new Thread(this);
