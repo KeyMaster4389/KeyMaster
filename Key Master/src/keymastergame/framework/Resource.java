@@ -48,6 +48,11 @@ public class Resource {
 	public static Image menuQuit;
 	public static Image menuQuit_Highlight;
 	
+	public static Image screenPressSpace;
+	public static Image screenWin;
+	public static Image screenLose;
+	
+	
 	//hud stuff	
 	public static Image number[];
 	public static Image time;
@@ -98,6 +103,10 @@ public class Resource {
 			menuQuit_Highlight = ImageIO.read(new File("data/menu/quit_highlight.png")); 
 			menuNewGame = ImageIO.read(new File("data/menu/startnew.png")); 
 			menuNewGame_Highlight = ImageIO.read(new File("data/menu/startnew_highlight.png")); 
+			
+			screenPressSpace = ImageIO.read(new File("data/PressSpace.png")); 
+			screenWin = ImageIO.read(new File("data/screen_youwin.bmp")); 
+			screenLose = ImageIO.read(new File("data/screen_youlose.bmp")); 
 			
 			//hud stuff
 			number = new Image[10];

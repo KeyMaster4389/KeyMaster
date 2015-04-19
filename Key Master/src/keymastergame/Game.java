@@ -32,8 +32,10 @@ public class Game {
 
 	public boolean levelComplete;
 	public int currentLevel; // 1, 2, 3
+	private final int lastLevel = 3; // 1, 2, 3
 
 	private int playerLives;
+	private final int startingLives = 3;
 
 	// wait this many frames before loading/reloading a level
 	public static final int reloadLevelDelayLose = 120;
@@ -59,7 +61,7 @@ public class Game {
 		levelComplete = false;
 		currentLevel = 1;
 
-		playerLives = 3;
+		playerLives = startingLives;
 
 		loadLevel();
 
@@ -162,62 +164,26 @@ public class Game {
 
 					levelComplete = true;
 					currentLevel++;
-					if (currentLevel == 4) {
+					if (currentLevel == lastLevel + 1) {
 
 						// you win!
-						// just do this for now
-						System.out.println("YOU'RE WINNER");
-						
-						//win message and ask to play again
-						int result = JOptionPane.showConfirmDialog(null,
-										"      \t      \t     Congratulations!!\nYou have defeated the evil Key Master!!\n     \t    \tWould you like to play again?",
-										"Congratulations! You win!",
-										JOptionPane.YES_NO_OPTION, 2, keyIcon);
-						
-
-						if (result == JOptionPane.YES_OPTION)
-							currentLevel = 1;
-						else
-							StartingClass.changeState(StartingClass.STATE_MAINMENU);
+						StartingClass.changeState(StartingClass.STATE_SCREEN_WIN);
+						return;
 					}
 					loadLevel();
 
 				} else if (plr.isDead) {
-					System.out.println("YOU DIED");
-
 					playerLives--;
-					
-					//message to player about lives remaining
-					JOptionPane.showMessageDialog(null,
-							"You have died.\nREMAINING LIVES: " + playerLives,
-							"REMAINING LIVES: " + playerLives, 2, keyIcon);
-
-					System.out.println("REMAINING LIVES: " + playerLives);
 
 					if (playerLives == 0) {
 						// game over
-						// just do this for now
-						System.out.println("GAME OVER :(");
-						Sound.GAMEOVER.play();
-
-						int result = JOptionPane.showConfirmDialog(null,
-										"         \t         Oh no!!\nYou have been defeated by\n     \t  the evil Key Master!!\nWould you like to play again?",
-										"Game Over", JOptionPane.YES_NO_OPTION,
-										2, keyIcon);
-
-						if (result == JOptionPane.YES_OPTION) {
-							currentLevel = 1;
-							playerLives = 3;
-						} else {
-							StartingClass.changeState(StartingClass.STATE_MAINMENU);
-							return;
-						}
+						StartingClass.changeState(StartingClass.STATE_SCREEN_LOSE);
+						return;
 					}
 					loadLevel();
 
 				}
 			}
-			return;
 		}
 	}
 

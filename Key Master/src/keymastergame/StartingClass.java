@@ -22,8 +22,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	
 	public static final int STATE_GAMEPLAY = 0;
 	public static final int STATE_MAINMENU = 1;
-	public static final int STATE_GAMEOVERSCREEN = 2;
-	public static final int STATE_VICTORYSCREEN = 3;
+	public static final int STATE_SCREEN_WIN = 2;
+	public static final int STATE_SCREEN_LOSE = 3;
 
 	public static int state;
 	
@@ -33,16 +33,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	//states;
 	public static Game gameState;
 	public static MainMenu menu;
-	//public static Screen gameOverScreen;
-	//public static Screen victoryScreen;
+	public static Screen currentScreen;
 	
 	// Image variables for double buffering
 	private Image image;
 	private Graphics second;
-	
-	//public static URL base;
-
-	
+		
 	public static final int WINDOWWIDTH = 960;
 	public static final int WINDOWHEIGHT = 640;
 	
@@ -81,13 +77,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		addKeyListener(this);
 		Frame frame = (Frame) this.getParent().getParent();
 		frame.setTitle("Key Master");
-		
-		//try {
-		//	base = getDocumentBase();
-		//} catch (Exception e) {
-			
-		//}
-		
+				
 		changeState(STATE_MAINMENU);
 
 		Thread thread = new Thread(this);
@@ -120,22 +110,19 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		while (true) {
 			// here we'll call the update methods of the game
 			// objects as well as the animate method.
-
-			//long startTime = System.nanoTime();
 			
 			switch (state) {
 				case STATE_GAMEPLAY: if (gameState != null) gameState.update();
 				break;
 				case STATE_MAINMENU: if (menu != null) menu.update();
 				break;
-			
-			
+				case STATE_SCREEN_WIN:
+				case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.update();
+				break;
 			}
 			
 			repaint();
 			
-			//long endTime = System.nanoTime();
-			//System.out.println("Game update time: " + (double)(endTime - startTime)/100000  + " milliseconds");
 			
 			try {
 				Thread.sleep(frameSpeed);
@@ -175,6 +162,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			break;
 			case STATE_MAINMENU: if (menu != null) menu.paint(g);
 			break;
+			case STATE_SCREEN_WIN:
+			case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.paint(g);
+			break;
 		
 		
 		
@@ -190,6 +180,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			break;
 			case STATE_MAINMENU: if (menu != null) menu.readInput(e.getKeyCode(), true);
 			break;
+			case STATE_SCREEN_WIN:
+			case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.readInput(e.getKeyCode(), true);
+			break;
 		
 		
 		}
@@ -203,6 +196,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		break;
 		case STATE_MAINMENU: if (menu != null) menu.readInput(e.getKeyCode(), false);
 		break;
+		case STATE_SCREEN_WIN:
+		case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.readInput(e.getKeyCode(), false);
+		break;
 		}
 	}
 
@@ -215,8 +211,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		
 		gameState = null;
 		menu = null;
-		//gameOverScreen = null;
-		//victoryScreen = null;
+		currentScreen = null;
 		
 		switch (targetState) {
 		
@@ -226,13 +221,11 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		case STATE_MAINMENU: state = STATE_MAINMENU; menu = new MainMenu();
 			break;
 			
-		//do nothing for now
-		case STATE_GAMEOVERSCREEN:
+		case STATE_SCREEN_WIN: state = STATE_SCREEN_WIN; currentScreen = new Screen(Screen.YOU_WIN, STATE_MAINMENU);
 			break;
 			
-		case STATE_VICTORYSCREEN:
+		case STATE_SCREEN_LOSE: state = STATE_SCREEN_LOSE; currentScreen = new Screen(Screen.YOU_LOSE, STATE_MAINMENU);
 			break;
-		
 		}
 		
 	}
