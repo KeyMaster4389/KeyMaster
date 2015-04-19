@@ -320,7 +320,9 @@ public class Game {
 
 		lvl.generateLevelCollision();
 
-		Sound.MUSIC.loop();
+		//restart music from beginning
+		Sound.MUSIC.setFramePosition(0);
+		Sound.MUSIC.loop(Clip.LOOP_CONTINUOUSLY);
 
 		return true;
 	}

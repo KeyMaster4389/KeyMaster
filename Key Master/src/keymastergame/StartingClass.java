@@ -67,8 +67,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 					+ "/data/sounds/tile_reappear.wav"));
 			Sound.GAMEOVER = Applet.newAudioClip(new URL(getCodeBase()
 					+ "/data/sounds/gameover.wav"));
-			Sound.MUSIC = Applet.newAudioClip(new URL(getCodeBase()
-					+ "/data/sounds/music.wav"));
 			Sound.MENU = Applet.newAudioClip(new URL(getCodeBase()
 					+ "/data/sounds/menu.wav"));
 			Sound.VICTORY = Applet.newAudioClip(new URL(getCodeBase()
@@ -77,6 +75,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Sound.setUpMusic(getCodeBase() + "/data/sounds/music.wav");
 
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
 		setBackground(Color.WHITE);
@@ -104,7 +103,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void destroy() {
-
+		Sound.closeMusic();
 	}
 
 	@Override
