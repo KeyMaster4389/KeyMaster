@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -31,8 +32,10 @@ public class Game {
 
 	public boolean levelComplete;
 	public int currentLevel; // 1, 2, 3
+	private final int lastLevel = 3; // 1, 2, 3
 
 	private int playerLives;
+	private final int startingLives = 3;
 
 	// wait this many frames before loading/reloading a level
 	public static final int reloadLevelDelayLose = 120;
@@ -58,7 +61,7 @@ public class Game {
 		levelComplete = false;
 		currentLevel = 1;
 
-		playerLives = 3;
+		playerLives = startingLives;
 
 		loadLevel();
 
@@ -86,14 +89,14 @@ public class Game {
 				e.update();
 				if (e.collisionActive())
 					doCollision(e);
-				
-				if(e instanceof EnemyA)
+
+				if (e instanceof EnemyA)
 					((EnemyA) e).updateAnimation();
-				else if(e instanceof EnemyB)
+				else if (e instanceof EnemyB)
 					((EnemyB) e).updateAnimation();
-				else if(e instanceof EnemyC)
+				else if (e instanceof EnemyC)
 					((EnemyC) e).updateAnimation();
-				
+
 				if (e instanceof EnemyObject
 						&& plr.collision.intersects(e.collision)) {
 					plr.die();
@@ -134,7 +137,6 @@ public class Game {
 			}
 
 			plr.updateAnimation();
-			
 
 			if (gameClock.getTime()) {
 				plr.die();
@@ -167,30 +169,17 @@ public class Game {
 
 					levelComplete = true;
 					currentLevel++;
-					if (currentLevel == 4) {
+					if (currentLevel == lastLevel + 1) {
 
 						// you win!
 						// just do this for now
 						System.out.println("YOU'RE WINNER");
 
-						StartingClass
-						.changeState(StartingClass.STATE_VICTORYSCREEN);
 						Sound.VICTORY.play();
 						currentLevel = 1;
-						
-						// win message and ask to play again
-//						int result = JOptionPane
-//								.showConfirmDialog(
-//										null,
-//										"      \t      \t     Congratulations!!\nYou have defeated the evil Key Master!!\n     \t    \tWould you like to play again?",
-//										"Congratulations! You win!",
-//										JOptionPane.YES_NO_OPTION, 2, keyIcon);
-//
-//						if (result == JOptionPane.YES_OPTION)
-//							currentLevel = 1;
-//						else
-//							StartingClass
-//									.changeState(StartingClass.STATE_MAINMENU);
+						StartingClass
+								.changeState(StartingClass.STATE_VICTORYSCREEN);
+						return;
 					}
 					loadLevel();
 
@@ -199,28 +188,20 @@ public class Game {
 
 					playerLives--;
 
-					// message to player about lives remaining
-					// JOptionPane.showMessageDialog(null,
-					// "You have died.\nREMAINING LIVES: " + playerLives,
-					// "REMAINING LIVES: " + playerLives, 2, keyIcon);
-					//
-					// System.out.println("REMAINING LIVES: " + playerLives);
-
 					if (playerLives == 0) {
 						// game over
-						// just do this for now
-						System.out.println("GAME OVER :(");
 
 						Sound.GAMEOVER.play();
 						StartingClass
 								.changeState(StartingClass.STATE_GAMEOVERSCREEN);
+						return;
 
 					}
 					loadLevel();
 
 				}
 			}
-			return;
+
 		}
 	}
 
@@ -304,8 +285,8 @@ public class Game {
 
 	public boolean loadLevel() {
 		String path = null;
-		
-		if(currentLevel == 1){
+
+		if (currentLevel == 1) {
 			path = "data/level1.txt";
 			gameClock = new Clock(30);
 		} else if (currentLevel == 2) {
@@ -322,7 +303,6 @@ public class Game {
 		plr = new Player();
 		key = new Key();
 		door = new Door();
-		//gameClock = new Clock();
 		levelComplete = false;
 
 		try {
@@ -351,7 +331,12 @@ public class Game {
 
 		lvl.generateLevelCollision();
 
-		Sound.MUSIC.loop();
+		 
+		//restart music from beginning 
+		Sound.MUSIC.setFramePosition(0); 
+	
+		Sound.MUSIC.loop(Clip.LOOP_CONTINUOUSLY); 
+
 
 		return true;
 	}

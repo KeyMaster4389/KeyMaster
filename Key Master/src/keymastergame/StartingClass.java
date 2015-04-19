@@ -39,8 +39,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	private Image image;
 	private Graphics second;
 
-	// public static URL base;
-
 	public static final int WINDOWWIDTH = 960;
 	public static final int WINDOWHEIGHT = 640;
 
@@ -70,8 +68,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 					+ "/data/sounds/tile_reappear.wav"));
 			Sound.GAMEOVER = Applet.newAudioClip(new URL(getCodeBase()
 					+ "/data/sounds/gameover.wav"));
-			Sound.MUSIC = Applet.newAudioClip(new URL(getCodeBase()
-					+ "/data/sounds/music.wav"));
+			//Sound.MUSIC = Applet.newAudioClip(new URL(getCodeBase()
+				//	+ "/data/sounds/music.wav"));
 			Sound.MENU = Applet.newAudioClip(new URL(getCodeBase()
 					+ "/data/sounds/menu.wav"));
 			Sound.VICTORY = Applet.newAudioClip(new URL(getCodeBase()
@@ -80,6 +78,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		Sound.setUpMusic(getCodeBase() + "/data/sounds/music4.wav");
 
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
 		setBackground(Color.WHITE);
@@ -87,12 +87,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		addKeyListener(this);
 		Frame frame = (Frame) this.getParent().getParent();
 		frame.setTitle("Key Master");
-
-		// try {
-		// base = getDocumentBase();
-		// } catch (Exception e) {
-
-		// }
 
 		changeState(STATE_MAINMENU);
 
@@ -113,7 +107,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void destroy() {
-
+		Sound.closeMusic();
 	}
 
 	@Override
@@ -147,10 +141,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			}
 
 			repaint();
-
-			// long endTime = System.nanoTime();
-			// System.out.println("Game update time: " + (double)(endTime -
-			// startTime)/100000 + " milliseconds");
 
 			try {
 				Thread.sleep(frameSpeed);

@@ -21,7 +21,6 @@ public class Level {
 	public void update() {
 		boolean redoCollision = false;
 		
-		//im just kinda winging this, it probably doesn't work
 		for (Tile t : tiles) {
 			t.update();
 			if (t.changedState) {
@@ -39,7 +38,6 @@ public class Level {
 	}
 	
 	public void paint(Graphics g) {
-		//g.drawImage(Resource.background, 0, 0, null);
 		
 		g.setColor(bgColor);
 		g.fillRect(0, 0, (int)StartingClass.WINDOWWIDTH, (int)StartingClass.WINDOWHEIGHT);
@@ -73,7 +71,6 @@ public class Level {
 	public void checkCollision(Tile check) {
 		//set appropriate collision flags for tiles
 		
-		//System.out.println("check tile: "+ check.gridX + ", "+check.gridY);
 		check.openTop = true;
 		check.openRight = true;
 		check.openBottom = true;
