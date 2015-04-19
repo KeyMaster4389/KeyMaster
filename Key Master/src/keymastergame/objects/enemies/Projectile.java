@@ -41,7 +41,7 @@ public class Projectile extends EnemyObject {
 	}
 	
 	public void paint(Graphics g) {
-		collision.paint(g, Color.RED);
+		collision.paint(g, Color.GREEN);
 	}
 
 	protected void act() {

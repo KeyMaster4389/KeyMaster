@@ -87,14 +87,13 @@ public class Game {
 				if (e.collisionActive())
 					doCollision(e);
 				
-				if(e instanceof EnemyC)
-					((EnemyC) e).updateAnimation();
-				
 				if(e instanceof EnemyA)
 					((EnemyA) e).updateAnimation();
+				else if(e instanceof EnemyB)
+					((EnemyB) e).updateAnimation();
+				else if(e instanceof EnemyC)
+					((EnemyC) e).updateAnimation();
 				
-				
-
 				if (e instanceof EnemyObject
 						&& plr.collision.intersects(e.collision)) {
 					plr.die();

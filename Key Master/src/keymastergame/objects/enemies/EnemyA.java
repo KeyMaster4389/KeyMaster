@@ -78,8 +78,8 @@ public class EnemyA extends EnemyObject {
 			
 		}else if (velocity.x > 0){
 			
-			//faceLeft = false;
-			facePlayer();
+			faceLeft = false;
+			//facePlayer();
 			
 			if(faceState != 1){
 				
@@ -93,8 +93,8 @@ public class EnemyA extends EnemyObject {
 			
 		}else if (velocity.x < 0){
 			
-			//faceLeft = true;
-			facePlayer();
+			faceLeft = true;
+			//facePlayer();
 			
 			if(faceState != 0){
 				
