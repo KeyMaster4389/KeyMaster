@@ -75,7 +75,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
-		Sound.setUpMusic(getCodeBase() + "/data/sounds/music4.wav");
+		Sound.setUpMusic(getCodeBase() + "/data/sounds/music.wav");
 
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
 		setBackground(Color.WHITE);

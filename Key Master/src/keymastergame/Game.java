@@ -261,9 +261,7 @@ public class Game {
 					new LevelCollision.LevelCollisionComparator());
 
 			// resolve each in order
-			// System.out.println("COLLISIONS");
 			for (LevelCollision e : collisionArr) {
-				// System.out.println(e.moveOutAxis + " " + e.magnitude);
 				e.resolveCollision();
 			}
 		}

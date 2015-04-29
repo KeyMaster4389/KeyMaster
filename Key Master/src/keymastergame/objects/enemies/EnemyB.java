@@ -25,7 +25,7 @@ public class EnemyB extends EnemyObject {
 
 	private int jumpDisable = 30;
 	private int breakDisable = 70;
-	private int tileDisable = 90;
+	private int tileDisable = 60;
 	private int jumpTimer = 0;
 
 	// animation - left 0, right 1
