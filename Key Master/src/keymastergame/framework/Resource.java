@@ -90,6 +90,15 @@ public class Resource {
 	public static Image screenWin;
 	public static Image screenLose;
 	
+	public static Image blackBackground;
+	public static Image gameOver;
+	public static Image tryAgain;
+	public static Image credits;
+	
+	public static Image congrats;
+	public static Image victory1;
+	public static Image victory2;
+	
 	// hud stuff
 	public static Image number[];
 	public static Image time;
@@ -181,6 +190,15 @@ public class Resource {
 			screenPressSpace = ImageIO.read(new File("data/PressSpace.png")); 
 			screenWin = ImageIO.read(new File("data/screen_youwin.bmp")); 
 			screenLose = ImageIO.read(new File("data/screen_youlose.bmp")); 
+			
+			blackBackground = ImageIO.read(new File("data/menu/blackbackground.png"));
+			gameOver = ImageIO.read(new File("data/menu/gameover.png"));
+			tryAgain = ImageIO.read(new File("data/menu/tryagain.png"));
+			credits = ImageIO.read(new File("data/menu/credits5.png"));
+			
+			congrats = ImageIO.read(new File("data/menu/congrats.png"));
+			victory1 = ImageIO.read(new File("data/menu/victory1.png"));
+			victory2 = ImageIO.read(new File("data/menu/victory2.png"));
 			
 			//hud stuff
 			number = new Image[10];

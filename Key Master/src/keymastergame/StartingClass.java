@@ -33,7 +33,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public static Game gameState;
 	public static MainMenu menu;
 	public static Screen currentScreen;
-	
+	public static GameOver gameOverScreen;
+	public static Victory victoryScreen;
+
 	// Image variables for double buffering
 	private Image image;
 	private Graphics second;
@@ -74,7 +76,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
 		Sound.setUpMusic(getCodeBase() + "/data/sounds/music.wav");
 
 		setSize(WINDOWWIDTH, WINDOWHEIGHT);
@@ -120,7 +122,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 					menu.update();
 				break;
 			case STATE_SCREEN_WIN:
-			case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.update();
+				if (victoryScreen != null)
+					victoryScreen.update();
+				break;
+			case STATE_SCREEN_LOSE:
+				if (gameOverScreen != null)
+					gameOverScreen.update();
 				break;
 			}
 
@@ -167,12 +174,15 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			if (menu != null)
 				menu.paint(g);
 			break;
-			case STATE_SCREEN_WIN:
-			case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.paint(g);
+		case STATE_SCREEN_WIN:
+			if (victoryScreen != null)
+				victoryScreen.paint(g);
 			break;
-		
-		
-		
+		case STATE_SCREEN_LOSE:
+			if (gameOverScreen != null)
+				gameOverScreen.paint(g);
+			break;
+
 		}
 	}// end of paint method
 
@@ -189,10 +199,14 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 				menu.readInput(e.getKeyCode(), true);
 			break;
 		case STATE_SCREEN_WIN:
-		case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.readInput(e.getKeyCode(), true);
+			if (victoryScreen != null)
+				victoryScreen.readInput(e.getKeyCode(), true);
 			break;
-		
-		
+		case STATE_SCREEN_LOSE:
+			if (gameOverScreen != null)
+				gameOverScreen.readInput(e.getKeyCode(), true);
+			break;
+
 		}
 
 	}
@@ -200,13 +214,22 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch (state) {
-		case STATE_GAMEPLAY: if (gameState != null) gameState.readInput(e.getKeyCode(), false);
-		break;
-		case STATE_MAINMENU: if (menu != null) menu.readInput(e.getKeyCode(), false);
-		break;
+		case STATE_GAMEPLAY:
+			if (gameState != null)
+				gameState.readInput(e.getKeyCode(), false);
+			break;
+		case STATE_MAINMENU:
+			if (menu != null)
+				menu.readInput(e.getKeyCode(), false);
+			break;
 		case STATE_SCREEN_WIN:
-		case STATE_SCREEN_LOSE: if (currentScreen != null) currentScreen.readInput(e.getKeyCode(), false);
-		break;
+			if (victoryScreen != null)
+				victoryScreen.readInput(e.getKeyCode(), false);
+			break;
+		case STATE_SCREEN_LOSE:
+			if (gameOverScreen != null)
+				gameOverScreen.readInput(e.getKeyCode(), false);
+			break;
 		}
 	}
 
@@ -220,7 +243,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		gameState = null;
 		menu = null;
 		currentScreen = null;
-		
+		victoryScreen = null;
+		gameOverScreen = null;
+
 		switch (targetState) {
 
 		case STATE_GAMEPLAY:
@@ -232,10 +257,17 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			state = STATE_MAINMENU;
 			menu = new MainMenu();
 			break;
-		case STATE_SCREEN_WIN: state = STATE_SCREEN_WIN; currentScreen = new Screen(Screen.YOU_WIN, STATE_MAINMENU);
+
+		case STATE_SCREEN_WIN:
+			state = STATE_SCREEN_WIN;
+			// currentScreen = new Screen(Screen.YOU_WIN, STATE_MAINMENU);
+			victoryScreen = new Victory();
 			break;
-			
-		case STATE_SCREEN_LOSE: state = STATE_SCREEN_LOSE; currentScreen = new Screen(Screen.YOU_LOSE, STATE_MAINMENU);
+
+		case STATE_SCREEN_LOSE:
+			state = STATE_SCREEN_LOSE;
+			// currentScreen = new Screen(Screen.YOU_LOSE, STATE_MAINMENU);
+			gameOverScreen = new GameOver();
 			break;
 		}
 
